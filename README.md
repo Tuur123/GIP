@@ -1,4 +1,4 @@
 # GIP
 Luchtkwaliteit
 
-Geïtegreede proef
+Geïntegreede proef
