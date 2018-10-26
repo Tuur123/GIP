@@ -1,1 +1,5 @@
-Co0 sensor
+Co2 sensor
+
+Meet van 400ppm to 8192ppm Co2.
+
+Meet Total Volatile Organic Compound van  0ppb to 1187ppb.
