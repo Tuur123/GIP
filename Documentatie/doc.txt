@@ -1,1 +1,0 @@
-Deze map is voor documentatie van sensors, arduino, rPi,..
