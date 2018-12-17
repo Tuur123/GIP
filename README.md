@@ -1,4 +1,5 @@
 # GIP
 Luchtkwaliteit
 
-Geïntegreede proef
+Geïntegreede proef van Arthur d'Hooge en Ruben Socquet
+
