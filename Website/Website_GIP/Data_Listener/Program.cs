@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net.Sockets;
+using System.Net;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Data.OleDb;
 
 namespace Data_Listener
 {
@@ -10,6 +14,8 @@ namespace Data_Listener
     {
         static void Main(string[] args)
         {
-        }
+            //code om met meerdere clients te communiceren
+            //en hun data in database te zetten
+        }   
     }
 }

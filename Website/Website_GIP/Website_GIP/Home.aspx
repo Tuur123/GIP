@@ -27,15 +27,7 @@
                 <tr>
                     <td class="auto-style1">
 
-                        <asp:Menu ID="Menu" runat="server" ForeColor="Blue" Orientation="Horizontal">
-                            <Items>
-                                <asp:MenuItem NavigateUrl="~/Home.aspx" Text="Home" Value="Home"></asp:MenuItem>
-                            </Items>
-                            <StaticHoverStyle BackColor="#3366FF" />
-                            <StaticMenuItemStyle BackColor="#3399FF" Font-Bold="True" ForeColor="#000066" />
-                        </asp:Menu>
-
-                    </td>
+                        &nbsp;</td>
                 </tr>
                 <tr>
                     <td class="auto-style2">
