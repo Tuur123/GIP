@@ -3,14 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website_GIP", "Website_GIP\Website_GIP.csproj", "{3509B47C-7BF1-4B5D-AC25-A0A8D49AAF85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website_GIP\Website.csproj", "{3509B47C-7BF1-4B5D-AC25-A0A8D49AAF85}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Listener", "Data_Listener\Data_Listener.csproj", "{E8CCFF77-9233-4551-8B31-A38E8FCC3171}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3AEF418B-BDC4-4BFD-B4A8-B9D4511C56AD}"
-	ProjectSection(SolutionItems) = preProject
-		Database.cs = Database.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
