@@ -1,6 +1,7 @@
 /******************************************************************************
-  WakeAndInterrupt.ino
+  Run for 20 minutes
 
+  Nathan Seidle @ SparkFun Electronics
   Marshall Taylor @ SparkFun Electronics
 
   April 4, 2017
@@ -8,27 +9,18 @@
   https://github.com/sparkfun/CCS811_Air_Quality_Breakout
   https://github.com/sparkfun/SparkFun_CCS811_Arduino_Library
 
-  This example configures the nWAKE and nINT pins.
-  The interrupt pin is configured to pull low when the data is
-  ready to be collected.
-  The wake pin is configured to enable the sensor during I2C communications
-
   Hardware Connections (Breakoutboard to Arduino):
   3.3V to 3.3V pin
   GND to GND pin
   SDA to A4
   SCL to A5
-  NOT_INT to D6
-  NOT_WAKE to D5 (For 5V arduinos, use resistor divider)
-    D5---
-         |
-         R1 = 4.7K
-         |
-         --------NOT_WAKE
-         |
-         R2 = 4.7K
-         |
-        GND
+
+  Calculates the current run time and indicates when 20 minutes has passed
+
+  Read the TVOC and CO2 values from the SparkFun CSS811 breakout board
+
+  A new sensor requires at 48-burn in. Once burned in a sensor requires
+  20 minutes of run in before readings are considered good.
 
   Resources:
   Uses Wire.h for i2c operation
@@ -43,64 +35,34 @@
 
   Distributed as-is; no warranty is given.
 ******************************************************************************/
-#include <SparkFunCCS811.h>
+#include <Wire.h>
+
+#include "SparkFunCCS811.h" //Click here to get the library: http://librarymanager/All#SparkFun_CCS811
 
 #define CCS811_ADDR 0x5B //Default I2C Address
 //#define CCS811_ADDR 0x5A //Alternate I2C Address
 
-#define PIN_NOT_WAKE 5
-#define PIN_NOT_INT 6
-
 CCS811 myCCS811(CCS811_ADDR);
 
-//Global sensor object
-//---------------------------------------------------------------
 void setup()
 {
-  //Start the serial
   Serial.begin(9600);
-  Serial.println();
-  Serial.println("...");
+  Serial.println("20 minute test");
 
-  CCS811Core::status returnCode;
+  Wire.begin();
 
   //This begins the CCS811 sensor and prints error status of .begin()
-  returnCode = myCCS811.begin();
-  Serial.print("CCS811 begin exited with: ");
+  CCS811Core::status returnCode = myCCS811.begin();
+  Serial.print("begin exited with: ");
   printDriverError( returnCode );
   Serial.println();
-
-  //This sets the mode to 60 second reads, and prints returned error status.
-  returnCode = myCCS811.setDriveMode(2);
-  Serial.print("Mode request exited with: ");
-  printDriverError( returnCode );
-  Serial.println();
-
-  //Configure and enable the interrupt line,
-  //then print error status
-  pinMode(PIN_NOT_INT, INPUT_PULLUP);
-  returnCode = myCCS811.enableInterrupts();
-  Serial.print("Interrupt configuation exited with: ");
-  printDriverError( returnCode );
-  Serial.println();
-
-  //Configure the wake line
-  pinMode(PIN_NOT_WAKE, OUTPUT);
-  digitalWrite(PIN_NOT_WAKE, 1); //Start asleep
-
 }
-//---------------------------------------------------------------
+
 void loop()
 {
-  //Look for interrupt request from CCS811
-  if (digitalRead(PIN_NOT_INT) == 0)
+  if (myCCS811.dataAvailable())
   {
-    //Wake up the CCS811 logic engine
-    digitalWrite(PIN_NOT_WAKE, 0);
-    //Need to wait at least 50 us
-    delay(1);
-    //Interrupt signal caught, so cause the CCS811 to run its algorithm
-    myCCS811.readAlgorithmResults(); //Calling this function updates the global tVOC and CO2 variables
+    myCCS811.readAlgorithmResults();
 
     Serial.print("CO2[");
     Serial.print(myCCS811.getCO2());
@@ -108,18 +70,43 @@ void loop()
     Serial.print(myCCS811.getTVOC());
     Serial.print("] millis[");
     Serial.print(millis());
-    Serial.print("]");
+    Serial.print("] ");
+    printRunTime();
     Serial.println();
-
-    //Now put the CCS811's logic engine to sleep
-    digitalWrite(PIN_NOT_WAKE, 1);
-    //Need to be asleep for at least 20 us
-    delay(1);
   }
-  delay(1); //cycle kinda fast
+  else if (myCCS811.checkForStatusError())
+  {
+    printSensorError();
+  }
+
+  delay(1000); //Wait for next reading
 }
 
+//Prints the amount of time the board has been running
+//Does the hour, minute, and second calcs
+void printRunTime()
+{
+  char buffer[50];
 
+  unsigned long runTime = millis();
+
+  int hours = runTime / (60 * 60 * 1000L);
+  runTime %= (60 * 60 * 1000L);
+  int minutes = runTime / (60 * 1000L);
+  runTime %= (60 * 1000L);
+  int seconds = runTime / 1000L;
+
+  sprintf(buffer, "RunTime[%02d:%02d:%02d]", hours, minutes, seconds);
+  Serial.print(buffer);
+
+  if (hours == 0 && minutes < 20) Serial.print(" Not yet valid");
+}
+
+//printDriverError decodes the CCS811Core::status type and prints the
+//type of error to the serial terminal.
+//
+//Save the return value of any function of type CCS811Core::status, then pass
+//to this function to see what the output was.
 //printDriverError decodes the CCS811Core::status type and prints the
 //type of error to the serial terminal.
 //

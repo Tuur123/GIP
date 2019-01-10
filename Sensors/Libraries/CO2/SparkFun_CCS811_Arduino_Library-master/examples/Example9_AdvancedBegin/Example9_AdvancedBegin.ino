@@ -1,5 +1,5 @@
 /******************************************************************************
-  BasicReadings.ino
+  Read basic CO2 and TVOCs on alternate Wire ports
 
   Marshall Taylor @ SparkFun Electronics
   Nathan Seidle @ SparkFun Electronics
@@ -11,8 +11,9 @@
 
   Read the TVOC and CO2 values from the SparkFun CSS811 breakout board
 
-  This is the simplest example.  It throws away most error information and
-  runs at the default 1 sample per second.
+  This shows how to begin communication with the sensor on a different Wire port.
+  Helpful if you have platform that is a slave to a larger system and need
+  a dedicated Wire port or if you need to talk to many sensors at the same time.
 
   A new sensor requires at 48-burn in. Once burned in a sensor requires
   20 minutes of run in before readings are considered good.
@@ -36,6 +37,8 @@
 
   Distributed as-is; no warranty is given.
 ******************************************************************************/
+#include <Wire.h>
+
 #include "SparkFunCCS811.h"
 
 #define CCS811_ADDR 0x5B //Default I2C Address
@@ -48,9 +51,11 @@ void setup()
   Serial.begin(9600);
   Serial.println("CCS811 Basic Example");
 
+  Wire1.begin(); //Compilation will fail here if your hardware doesn't support additional Wire ports
+
   //It is recommended to check return status on .begin(), but it is not
   //required.
-  CCS811Core::status returnCode = mySensor.begin();
+  CCS811Core::status returnCode = mySensor.begin(Wire1);
   if (returnCode != CCS811Core::SENSOR_SUCCESS)
   {
     Serial.println(".begin() returned with an error.");

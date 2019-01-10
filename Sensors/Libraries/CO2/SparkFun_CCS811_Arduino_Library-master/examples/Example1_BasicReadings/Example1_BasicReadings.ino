@@ -1,5 +1,5 @@
 /******************************************************************************
-  BasicReadings.ino
+  Read basic CO2 and TVOCs
 
   Marshall Taylor @ SparkFun Electronics
   Nathan Seidle @ SparkFun Electronics
@@ -36,7 +36,9 @@
 
   Distributed as-is; no warranty is given.
 ******************************************************************************/
-#include "SparkFunCCS811.h"
+#include <Wire.h>
+
+#include "SparkFunCCS811.h" //Click here to get the library: http://librarymanager/All#SparkFun_CCS811
 
 #define CCS811_ADDR 0x5B //Default I2C Address
 //#define CCS811_ADDR 0x5A //Alternate I2C Address
@@ -47,6 +49,8 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("CCS811 Basic Example");
+
+  Wire.begin(); //Inialize I2C Harware
 
   //It is recommended to check return status on .begin(), but it is not
   //required.
@@ -73,9 +77,12 @@ void loop()
     Serial.print("] tVOC[");
     //Returns calculated TVOC reading
     Serial.print(mySensor.getTVOC());
-    Serial.println("]");
+    Serial.print("] millis[");
+    //Simply the time since program start
+    Serial.print(millis());
+    Serial.print("]");
+    Serial.println();
   }
 
   delay(10); //Don't spam the I2C bus
 }
-
