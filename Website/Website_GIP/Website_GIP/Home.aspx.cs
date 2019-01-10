@@ -13,5 +13,10 @@ namespace Website_GIP
         {
 
         }
+
+        protected void BtnLogin_Click(object sender, ImageClickEventArgs e)
+        {
+            
+        }
     }
 }
