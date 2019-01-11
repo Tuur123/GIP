@@ -7,20 +7,19 @@
   ADR  <-> GND
 */
 
-#include <BH1750FVI.h>
+#include <BH1750FVI.h>                                 // Voegt de bibliotheek van de sensor toe
 
-// maak sensor object
-BH1750FVI LightSensor(BH1750FVI::k_DevModeContLowRes);
+BH1750FVI LichtSensor(BH1750FVI::k_DevModeContLowRes); // Maakt het object LichtSensor aan
 
 void setup() 
 {
-  Serial.begin(9600);
-  LightSensor.begin();  
+  Serial.begin(9600);                                  
+  LichtSensor.begin();                                // Hier hoeft geen Baud rate ingesteld te worden want dit gebuirt automatisch 
 }
 
 void loop()
 {
-  uint16_t lux = LightSensor.GetLightIntensity();
+  uint16_t lux = LichtSensor.GetLightIntensity();    // Leest de resulaten van de sensor in
   Serial.print("Lichtsterkte: ");
   Serial.println(lux);
   delay(250);
