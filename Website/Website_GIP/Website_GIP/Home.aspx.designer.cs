@@ -31,6 +31,24 @@ namespace Website_GIP {
         protected global::System.Web.UI.WebControls.Image Logo;
         
         /// <summary>
+        /// TbUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TbUser;
+        
+        /// <summary>
+        /// TbPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TbPassword;
+        
+        /// <summary>
         /// BtnLogin control.
         /// </summary>
         /// <remarks>
@@ -47,6 +65,24 @@ namespace Website_GIP {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton BtnRegister;
+        
+        /// <summary>
+        /// SideImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image SideImage;
+        
+        /// <summary>
+        /// LblUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblUser;
         
         /// <summary>
         /// CheckBox1 control.

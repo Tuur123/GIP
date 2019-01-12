@@ -21,7 +21,7 @@ namespace Data_Listener
             {
                 try
                 {
-                    TcpListener serverSocket = new TcpListener(350);
+                    TcpListener serverSocket = new TcpListener(IPAddress.Any, 350);
                     int verzoekTeller = 0;
                     TcpClient clientSocket = default(TcpClient);
 

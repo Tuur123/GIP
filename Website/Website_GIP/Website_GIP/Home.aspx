@@ -95,6 +95,13 @@
             margin-top: 1px;
         }
 
+        .auto-style28 {
+            width: 100%;
+        }
+        .auto-style29 {
+            width: 60%;
+        }
+
     </style>
 </head>
 
@@ -112,15 +119,17 @@
                                     <asp:Image ID="Logo" runat="server" ImageUrl="~/logo.jpg" Width="721px" Height="97px" CssClass="auto-style27" />
                                 </td>
                                 <td class="auto-style25">
-                                    <p>Email: <input id="Text1" type="text" /></p>
-                                    <p>Password:
-                                        <input id="Password1" type="password" /></p>
+                                    <p>Email: 
+                                        <asp:TextBox ID="TbUser" runat="server" Height="22px"></asp:TextBox>
+                                        Password:
+                                        <asp:TextBox ID="TbPassword" runat="server" TextMode="Password"></asp:TextBox>
+                                    </p>
                                 </td>
                                 <td class="auto-style16">
                                     <asp:ImageButton ID="BtnLogin" runat="server" Height="48px" ImageUrl="~/login.jpg" Width="174px" ImageAlign="AbsMiddle" OnClick="BtnLogin_Click" />
                                 </td>
                                 <td class="auto-style18">
-                                    <asp:ImageButton ID="BtnRegister" runat="server" Height="48px" ImageUrl="~/register.png" Width="174px" ImageAlign="AbsMiddle" />
+                                    <asp:ImageButton ID="BtnRegister" runat="server" Height="48px" ImageUrl="~/register.png" Width="174px" ImageAlign="AbsMiddle" OnClick="BtnRegister_Click" />
                                 </td>
                             </tr>
                         </table>
@@ -131,14 +140,24 @@
 
                         <table class="auto-style8">
                             <tr>
-                                <td class="auto-style9"></td>
+                                <td class="auto-style9">
+                                    <asp:Image ID="SideImage" runat="server" Height="520px" ImageUrl="~/sideImage.png" Width="193px" />
+                                </td>
                                 <td class="auto-style10">
                                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7042.547259304406!2d4.467869758593663!3d51.38621337554649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c40f75fda16103%3A0x7902d23023c0349!2sGitok+bovenbouw!5e0!3m2!1snl!2sbe!4v1546957762004" style="border:0" class="auto-style26" ></iframe>
                                 </td>
                                 <td>
                                     <table class="auto-style11">
                                         <tr>
-                                            <td class="auto-style15"><p>Metingen:</p></td>
+                                            <td class="auto-style15">
+                                                <table class="auto-style28">
+                                                    <tr>
+                                                        <td class="auto-style29">Gebruiker: <asp:Label ID="LblUser" runat="server" Text="Niet ingelogd"></asp:Label>
+                                                        </td>
+                                                        <td>Metingen:</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="auto-style23">
@@ -149,21 +168,21 @@
                                         </tr>
                                         <tr>
                                             <td class="auto-style20">
-                                                <p><asp:CheckBox ID="CheckBox2" runat="server" Text="CO₂" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <asp:Label ID="Label2" runat="server"></asp:Label></p>
+                                                <p><asp:CheckBox ID="CheckBox2" runat="server" Text="CO₂" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <asp:Label ID="Label2" runat="server"></asp:Label></p>
                                                 <p>&nbsp;</p>
                                                 <p>&nbsp;</p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="auto-style24">
-                                                <p><asp:CheckBox ID="CheckBox3" runat="server"  Text="Luchtvochtigheid" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label3" runat="server"></asp:Label></p>
+                                                <p><asp:CheckBox ID="CheckBox3" runat="server"  Text="Luchtvochtigheid" />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <asp:Label ID="Label3" runat="server"></asp:Label></p>
                                                 <p>&nbsp;</p>
                                                 <p>&nbsp;</p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="auto-style21">
-                                                <p><asp:CheckBox ID="CheckBox4" runat="server" Text="Temperatuur" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label4" runat="server"></asp:Label></p>
+                                                <p><asp:CheckBox ID="CheckBox4" runat="server" Text="Temperatuur" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label4" runat="server"></asp:Label></p>
                                                 <p>&nbsp;</p>
                                                 <p>&nbsp;</p>
                                             </td>
