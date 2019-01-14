@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 public class Database
 {
-    private string conString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ..\Database.accdb; Persist Security Info = False;";
+    //private string conString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ..\Database.accdb; Persist Security Info = False;";
 
     public Database()
 	{
