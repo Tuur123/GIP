@@ -8,8 +8,6 @@
 
     <title>Luchtkwaliteit</title>
 
-    <link rel="stylesheet" href="styles.css"/>
-
     <style type="text/css">
         .auto-style1 {
             width: 1300px;
@@ -101,6 +99,9 @@
         .auto-style29 {
             width: 60%;
         }
+        #map {
+        height: 100%;
+      }
 
     </style>
 </head>
@@ -144,7 +145,12 @@
                                     <asp:Image ID="SideImage" runat="server" Height="520px" ImageUrl="~/sideImage.png" Width="193px" />
                                 </td>
                                 <td class="auto-style10">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7042.547259304406!2d4.467869758593663!3d51.38621337554649!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c40f75fda16103%3A0x7902d23023c0349!2sGitok+bovenbouw!5e0!3m2!1snl!2sbe!4v1546957762004" style="border:0" class="auto-style26" ></iframe>
+                                    <!-- Hier komt gmaps kaart -->
+
+                                    <div id="map"></div>
+                                    <script src="GMaps.js"></script>
+                                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5h3EfLBv1dxTEdvPJ2KM6dYDVaULzIn4&callback=initMap"
+                                      async defer></script>
                                 </td>
                                 <td>
                                     <table class="auto-style11">

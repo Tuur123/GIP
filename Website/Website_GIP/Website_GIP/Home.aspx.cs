@@ -20,14 +20,23 @@ namespace Website_GIP
 
         protected void BtnLogin_Click(object sender, ImageClickEventArgs e)
         {
-            if (ComputeHash(TbUser.Text + TbPassword.Text) == db.ValidateUser(TbUser.Text))
+            string loginFail = "Verkeerde wachtwoord of gebruikersnaam!";
+            string alreadyLoggedIn = "U bent al ingelogd!";
+
+            if(Convert.ToBoolean(ViewState["Login"]))
+                Response.Write("<script>alert('" + alreadyLoggedIn + "')</script>");
+
+            else if (ComputeHash(TbUser.Text + TbPassword.Text) == db.ValidateUser(TbUser.Text))
             {
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
+                ViewState["Login"] = true;
                 DrawMap(TbUser.Text);
+                LblUser.Text = TbUser.Text;
             }
             else
             {
                 //user heeft ongeldige gegevens.
+                Response.Write("<script>alert('" + loginFail + "')</script>");
             }
         }
 
@@ -38,7 +47,11 @@ namespace Website_GIP
 
         private void DrawMap(string user)
         {
-            throw new NotImplementedException();
+            string[,] data = db.getUserData(user);
+          
+            string func = string.Format("{lat: {0}, lng: {1}}", lat, lng);
+
+            Page.ClientScript.RegisterStartupScript(GetType(),"test","drawMarker(" + func + ");", true);
         }
 
         private string ComputeHash(string input)
