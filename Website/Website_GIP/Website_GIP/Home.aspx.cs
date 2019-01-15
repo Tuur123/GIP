@@ -47,7 +47,11 @@ namespace Website_GIP
 
         private void DrawMap(string user)
         {
-            //kaartje tekene neef
+            string[,] data = db.getUserData(user);
+          
+            string func = string.Format("{lat: {0}, lng: {1}}", lat, lng);
+
+            Page.ClientScript.RegisterStartupScript(GetType(),"test","drawMarker(" + func + ");", true);
         }
 
         private string ComputeHash(string input)
