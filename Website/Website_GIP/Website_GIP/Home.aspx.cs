@@ -48,7 +48,8 @@ namespace Website_GIP
         private void DrawMap(string user)
         {
             string[,] data = db.getUserData(user);
-          
+            string lat = "51.152487";
+            string lng = "4.512685";
             string func = string.Format("{lat: {0}, lng: {1}}", lat, lng);
 
             Page.ClientScript.RegisterStartupScript(GetType(),"test","drawMarker(" + func + ");", true);
