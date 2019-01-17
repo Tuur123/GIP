@@ -59,7 +59,7 @@ namespace Data_Listener
                 }
                 catch (NotSupportedException error)
                 {
-                    Console.WriteLine(error.ToString());
+                    Console.WriteLine(error.Message);
                 }
             }
         }   
