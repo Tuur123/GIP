@@ -1,212 +1,132 @@
 ﻿<%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Website_GIP.Home" %>
 
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head runat="server">
-
     <title>Luchtkwaliteit</title>
-
-    <style type="text/css">
-        .auto-style1 {
-            width: 1300px;
-        }
-        .auto-style2 {
-            width: 1300px;
-            height: 500px;
-        }
-        .auto-style3 {
-            width: 1300px;
-            margin-left: 80px;
-            }
-        .auto-style4 {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 0px;
-            height: 64px;
-        }
-        .auto-style8 {
-            width: 100%;
-            height: 527px;
-        }
-        .auto-style9 {
-            width: 190px;
-        }
-        .auto-style10 {
-            width: 724px;
-        }
-        .auto-style11 {
-            width: 99%;
-            height: 535px;
-            background-color: lightblue;
-        }
-        .auto-style15 {
-            height: 10%;
-        }
-        .auto-style16 {
-            height: 54px;
-            width: 176px;
-            text-align: center;       
-            padding-left: 5px;
-        }
-        .auto-style17 {
-            height: 50px;
-            width: 736px;           
-            padding-right: 15%;
-        }
-        .auto-style18 {
-            height: 54px;
-            text-align: center;
-        }
-        body {
-            font-family: Cambria;
-            background-color: aliceblue;
-        }
-        p {
-            text-align: left;          
-        }
-        .auto-style19 {
-            width: 1301px;
-        }
-        .auto-style20 {
-            height: 20%;
-        }
-        .auto-style21 {
-            height: 20%;
-        }
-        .auto-style23 {
-            height: 20%;
-        }
-        .auto-style24 {
-            height: 20%;
-        }
-        .auto-style25 {
-            width: 171px;
-        }
-        .auto-style26 {
-            width: 707px;
-            height: 527px;
-            margin-top: 0px;
-        }
-        .auto-style27 {
-            margin-top: 1px;
-        }
-
-        .auto-style28 {
-            width: 100%;
-        }
-        .auto-style29 {
-            width: 60%;
-        }
-        #map {
-        height: 100%;
-      }
-
-    </style>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body>  
     <form id="form1" runat="server">
-
-        <div class="auto-style19">
-            <table>
-                <tr>
-                    <td class="auto-style3">
-                                               
-                        <table class="auto-style4">
-                            <tr>
-                                <td class="auto-style17">
-                                    <asp:Image ID="Logo" runat="server" ImageUrl="~/logo.jpg" Width="721px" Height="97px" CssClass="auto-style27" />
-                                </td>
-                                <td class="auto-style25">
-                                    <p>Email: 
-                                        <asp:TextBox ID="TbUser" runat="server" Height="22px"></asp:TextBox>
-                                        Password:
-                                        <asp:TextBox ID="TbPassword" runat="server" TextMode="Password"></asp:TextBox>
-                                    </p>
-                                </td>
-                                <td class="auto-style16">
-                                    <asp:ImageButton ID="BtnLogin" runat="server" Height="48px" ImageUrl="~/login.jpg" Width="174px" ImageAlign="AbsMiddle" OnClick="BtnLogin_Click" />
-                                </td>
-                                <td class="auto-style18">
-                                    <asp:ImageButton ID="BtnRegister" runat="server" Height="48px" ImageUrl="~/register.png" Width="174px" ImageAlign="AbsMiddle" OnClick="BtnRegister_Click" />
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style2">
-
-                        <table class="auto-style8">
-                            <tr>
-                                <td class="auto-style9">
-                                    <asp:Image ID="SideImage" runat="server" Height="520px" ImageUrl="~/sideImage.png" Width="193px" />
-                                </td>
-                                <td class="auto-style10">
-                                    <!-- Hier komt gmaps kaart -->
-
-                                    <div id="map"></div>
-                                    <script src="GMaps.js"></script>
-                                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5h3EfLBv1dxTEdvPJ2KM6dYDVaULzIn4&callback=initMap"
-                                      async defer></script>
-                                </td>
-                                <td>
-                                    <table class="auto-style11">
-                                        <tr>
-                                            <td class="auto-style15">
-                                                <table class="auto-style28">
-                                                    <tr>
-                                                        <td class="auto-style29">Gebruiker: <asp:Label ID="LblUser" runat="server" Text="Niet ingelogd"></asp:Label>
-                                                        </td>
-                                                        <td>Metingen:</td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="auto-style23">
-                                                <p><asp:CheckBox ID="CheckBox1" runat="server" Text="Lichtsterkte" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label1" runat="server"></asp:Label></p>
-                                                <p>&nbsp;</p>
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="auto-style20">
-                                                <p><asp:CheckBox ID="CheckBox2" runat="server" Text="CO₂" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; <asp:Label ID="Label2" runat="server"></asp:Label></p>
-                                                <p>&nbsp;</p>
-                                                <p>&nbsp;</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="auto-style24">
-                                                <p><asp:CheckBox ID="CheckBox3" runat="server"  Text="Luchtvochtigheid" />&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <asp:Label ID="Label3" runat="server"></asp:Label></p>
-                                                <p>&nbsp;</p>
-                                                <p>&nbsp;</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="auto-style21">
-                                                <p><asp:CheckBox ID="CheckBox4" runat="server" Text="Temperatuur" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label4" runat="server"></asp:Label></p>
-                                                <p>&nbsp;</p>
-                                                <p>&nbsp;</p>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="auto-style1">
-                        <p>over ons:</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    <div>
+        <table class="mainTable">
+        <tr>
+            <td class="banner">
+                <table class="header">
+                    <tr>
+                        <td style="width: 70%;">
+                            <asp:Image ID="ImgBanner" runat="server" ImageUrl="~/logo.jpg" ImageAlign="Left" Width="100%"/>
+                        </td>
+                        <td style="width: 10%">                            
+                            <table class="login">
+                                <tr>
+                                    <td><asp:TextBox ID="TbUser" runat="server" EnableViewState="true">Username</asp:TextBox>
+                            </td>
+                                </tr>
+                                <tr>
+                                    <td><asp:TextBox ID="TbPassword" runat="server" TextMode="Password" TabIndex="1">Password</asp:TextBox></td>
+                                </tr>
+                            </table>                            
+                        </td>
+                        <td style="width: 10%">
+                            <asp:Button ID="BtnLogin" runat="server" Font-Names="Arial Black" Height="50px" Text="Login" Width="100px" OnClick="BtnLogin_Click"/>
+                        </td>
+                        <td style="width: 10%">
+                            <asp:Button ID="BtnRegister" runat="server" Font-Names="Arial Black" Height="50px" Text="Register" Width="100px" OnClick="BtnRegister_Click"/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="mainPage">
+                <table class="elements">
+                    <tr>
+                        <td class="settings"></td>
+                        <td class="map">&nbsp;</td>
+                        <td class="data">
+                            <table class="charts">
+                                <tr>
+                                    <td>
+                                        <asp:Label ID="LblUser" runat="server" Text="User:"></asp:Label>
+                                    </td>
+                                    <td>
+                                        <asp:Label ID="LblData" runat="server" Text="Metingen:"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Chart ID="ChartTemp" runat="server" DataSourceID="Database" Height="200px">
+                                            <series>
+                                                <asp:Series ChartType="Spline" Name="Series1" XValueMember="Tijd" YValueMembers="Temperatuur">
+                                                </asp:Series>
+                                            </series>
+                                            <chartareas>
+                                                <asp:ChartArea Name="ChartArea1">
+                                                </asp:ChartArea>
+                                            </chartareas>
+                                        </asp:Chart>
+                                        <asp:SqlDataSource ID="Database" runat="server" ConnectionString="<%$ ConnectionStrings:test %>" ProviderName="<%$ ConnectionStrings:test.ProviderName %>" SelectCommand="SELECT [Tijd], [Temperatuur], [Vochtigheid], [CO2], [Lichtsterkte] FROM [Waardes] WHERE ([Gebruiker] = ?)">
+                                            <SelectParameters>
+                                                <asp:ControlParameter ControlID="TbUser" Name="Gebruiker" PropertyName="Text" Type="String" />
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
+                                    </td>
+                                    <td>
+                                        <asp:Chart ID="ChartLicht" runat="server" Height="200px" DataSourceID="Database">
+                                            <series>
+                                                <asp:Series Name="Series1" ChartType="Spline" XValueMember="Tijd" YValueMembers="Lichtsterkte">
+                                                </asp:Series>
+                                            </series>
+                                            <chartareas>
+                                                <asp:ChartArea Name="ChartArea1">
+                                                </asp:ChartArea>
+                                            </chartareas>
+                                        </asp:Chart>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <asp:Chart ID="ChartVocht" runat="server" Height="200px" DataSourceID="Database">
+                                            <series>
+                                                <asp:Series Name="Series1" ChartType="Spline" XValueMember="Tijd" YValueMembers="Vochtigheid">
+                                                </asp:Series>
+                                            </series>
+                                            <chartareas>
+                                                <asp:ChartArea Name="ChartArea1">
+                                                </asp:ChartArea>
+                                            </chartareas>
+                                        </asp:Chart>
+                                    </td>
+                                    <td>
+                                        <asp:Chart ID="ChartCO2" runat="server" Height="200px" DataSourceID="Database">
+                                            <series>
+                                                <asp:Series Name="Series1" ChartType="Spline" XValueMember="Tijd" YValueMembers="CO2">
+                                                </asp:Series>
+                                            </series>
+                                            <chartareas>
+                                                <asp:ChartArea Name="ChartArea1">
+                                                </asp:ChartArea>
+                                            </chartareas>
+                                        </asp:Chart>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>                           
+        </tr>
+        <tr>
+            <td class="footer"></td>                        
+        </tr>
+    </table>
+    </div>  
     </form>
 </body>
 </html>

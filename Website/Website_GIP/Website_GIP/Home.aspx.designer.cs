@@ -22,13 +22,13 @@ namespace Website_GIP {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// Logo control.
+        /// ImgBanner control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Logo;
+        protected global::System.Web.UI.WebControls.Image ImgBanner;
         
         /// <summary>
         /// TbUser control.
@@ -55,7 +55,7 @@ namespace Website_GIP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton BtnLogin;
+        protected global::System.Web.UI.WebControls.Button BtnLogin;
         
         /// <summary>
         /// BtnRegister control.
@@ -64,16 +64,7 @@ namespace Website_GIP {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton BtnRegister;
-        
-        /// <summary>
-        /// SideImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image SideImage;
+        protected global::System.Web.UI.WebControls.Button BtnRegister;
         
         /// <summary>
         /// LblUser control.
@@ -85,75 +76,57 @@ namespace Website_GIP {
         protected global::System.Web.UI.WebControls.Label LblUser;
         
         /// <summary>
-        /// CheckBox1 control.
+        /// LblData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+        protected global::System.Web.UI.WebControls.Label LblData;
         
         /// <summary>
-        /// Label1 control.
+        /// ChartTemp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart ChartTemp;
         
         /// <summary>
-        /// CheckBox2 control.
+        /// Database control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox2;
+        protected global::System.Web.UI.WebControls.SqlDataSource Database;
         
         /// <summary>
-        /// Label2 control.
+        /// ChartLicht control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart ChartLicht;
         
         /// <summary>
-        /// CheckBox3 control.
+        /// ChartVocht control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox3;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart ChartVocht;
         
         /// <summary>
-        /// Label3 control.
+        /// ChartCO2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// CheckBox4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox4;
-        
-        /// <summary>
-        /// Label4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart ChartCO2;
     }
 }
