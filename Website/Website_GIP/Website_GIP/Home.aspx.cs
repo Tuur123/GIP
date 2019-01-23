@@ -49,7 +49,7 @@ namespace Website_GIP
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;               
                 LblUser.Text = TbUser.Text;
-                RegisterStartupScript.ClientScript(this.GetType(), "UpdateMap", );
+                ScriptManager.RegisterStartupScript(this, GetType(), "Javascript", "UpdateMap();", true);
                 //DrawMap(TbUser.Text);
             }
             else
