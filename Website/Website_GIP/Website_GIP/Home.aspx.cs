@@ -30,7 +30,7 @@ namespace Website_GIP
             {
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;
-                DrawMap(TbUser.Text);
+                //DrawMap(TbUser.Text);
                 LblUser.Text = TbUser.Text;
             }
             else

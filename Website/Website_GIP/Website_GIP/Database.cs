@@ -4,7 +4,8 @@ using System.Data.OleDb;
 
 public class Database
 {
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\leerling\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.accdb; Persist Security Info = False;";
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.accdb;Persist Security Info = False;";
+    
 
     public Database()
 	{
@@ -97,7 +98,7 @@ public class Database
         }
         catch (Exception e)
         {
-            result[0, 0] = e.Message;
+            //result[0, 0] = e.Message;
         }
 
         return result;
