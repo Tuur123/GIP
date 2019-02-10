@@ -1,17 +1,24 @@
-﻿body {   
-     font-family: Cambria;
-     background-image: linear-gradient(#add8e6, #000080);
+﻿html {
+    height: 100%;
 }
 
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Cambria;
+    background-image: linear-gradient(#add8e6, #000080);
+}
 p {
    text-align: left;          
 }
 
 #map {
-     position: absolute;
-     top: 18%;
-     bottom: 16%;
-     width: 45%;           
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .marker {
@@ -28,4 +35,5 @@ p {
 }
 .logo{
     width: 70%;
+    height: 20%;
 }

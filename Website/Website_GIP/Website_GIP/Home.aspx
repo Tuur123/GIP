@@ -11,26 +11,38 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
-
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style type="text/css">
+    </style>
 </head>
 
 <body>  
+    <form id="form1" runat="server">
     <table class="mainTable">
         <tr>
             <td>
                 <table class="mainTable">
                     <tr class="logo">
-                        <td></td>
+                        <td style="width: 70%">
+                            <asp:Image ID="Banner" runat="server" ImageUrl="~/logo.jpg" Width="100%" />
+                        </td>
                         <td>
                             <table class="mainTable">
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td style="width: 50%">
+                                        <asp:TextBox ID="TbUser" runat="server" Width="100%">Username</asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="BtnLogin" runat="server" Text="Login" Width="100%" />
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <asp:TextBox ID="TbPassword" runat="server" TextMode="Password" Width="100%"></asp:TextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Button ID="BtnRegister" runat="server" Text="Register" Width="100%" />
+                                    </td>
                                 </tr>
                             </table>
                         </td>
@@ -42,14 +54,19 @@
             <td>
                 <table class="mainTable">
                     <tr>
-                        <td></td>
+                        <td style="width: 70%">
+                            <div id='map'></div>
+                              <script src="Maps.js"></script>                          
+                        </td>
                         <td>
                             <table class="mainTable">
                                 <tr>
                                     <td>
                                         <table class="mainTable">
                                             <tr>
-                                                <td></td>
+                                                <td style="width: 50%">
+                                                    <asp:Label ID="LblUser" runat="server" Text="Label"></asp:Label>
+                                                </td>
                                                 <td></td>
                                             </tr>
                                         </table>
@@ -67,9 +84,7 @@
         <tr>
             <td></td>
         </tr>
-    </table>
-   
-    
-   
+    </table>  
+    </form>
 </body>
 </html>
