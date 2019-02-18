@@ -98,6 +98,7 @@ public class Database
         }
         catch (Exception e)
         {
+            Console.WriteLine(e.Message);
             //result[0, 0] = e.Message;
         }
 
