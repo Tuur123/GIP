@@ -17,9 +17,11 @@ p {
 
 #map {
     position: absolute;
-    top: 0;
+    top: 125px;
     bottom: 0;
-    width: 100%;
+    left: 600px;
+    width: 645px;
+    height: 500px;
 }
 
 .marker {

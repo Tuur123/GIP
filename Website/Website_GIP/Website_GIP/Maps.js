@@ -28,7 +28,7 @@ var geojson = {
             coordinates: [4, 51]
         },
         properties: {
-            title: 'Meeting door: Ruben',
+            title: 'Meting door: Ruben',
             description: 'San Francisco, California'
         }
     }]

@@ -52,9 +52,62 @@
                 <td>
                     <table class="mainTable">
                         <tr>
-                            <td style="width: 70%">
-                                <div id='map'></div>
-                                <script src="Maps.js"></script>
+                            <td >
+                                    <div id='map'></div>
+
+                                    <script>
+
+                                        mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
+
+                                        var map = new mapboxgl.Map({
+                                          container: 'map',
+                                          style: 'mapbox://styles/mapbox/streets-v9',
+                                            center: [4.471421, 51.386688],
+                                          zoom: 13
+                                        });
+
+                                // Code voor de marker
+                                        var geojson = {
+                                            type: 'FeatureCollection',
+                                            features: [{
+                                                type: 'Feature',
+                                                geometry: {
+                                                    type: 'Point',
+                                                    coordinates: [4.471421, 51.386688]
+                                                },
+                                                properties: {
+                                                    title: 'Mapbox',
+                                                    description: 'Washington, D.C.'
+                                                }
+                                            },
+                                            {
+                                                type: 'Feature',
+                                                geometry: {
+                                                    type: 'Point',
+                                                    coordinates: [4, 51]
+                                                },
+                                                properties: {
+                                                    title: 'Meeting door: Ruben',
+                                                    description: 'San Francisco, California'
+                                                }
+                                            }]
+                                        };
+                                        // add markers to map
+                                        geojson.features.forEach(function (marker)
+                                        {
+                                          // create a HTML element for each feature
+                                          var el = document.createElement('div');
+                                          el.className = 'marker';
+
+                                          // make a marker for each feature and add to the map
+                                          new mapboxgl.Marker(el)
+                                              .setLngLat(marker.geometry.coordinates)
+                                              .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                                                  .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+                                            .addTo(map);
+                                                });
+                                        map.addControl(new mapboxgl.NavigationControl());
+                                </script>
                             </td>
                             <td>
                                 <table class="mainTable">
