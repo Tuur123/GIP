@@ -21,8 +21,8 @@
                 <td>
                     <table class="mainTable">
                         <tr class="logo">
-                            <td style="width: 70%; background-color: #7499A9">                      
-                                <img src="cloud_animation.png" class="logoAnimation"/>
+                            <td style="width: 70%; background-color: #7499A9; border-top-right-radius:100px; border-bottom-right-radius:100px">                      
+                                <img src="logo_Luchtkwaliteit.png" class="logoAnimation" style="background-color: #7499A9"/>
                             </td>
                             <td>
                                 <table class="mainTable">
@@ -124,7 +124,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td></td>
+                                        <td>&nbsp;</td>
                                     </tr>
                                 </table>
                             </td>
