@@ -69,7 +69,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Maps.js" />
     <Content Include="Home.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="styles.css" />
