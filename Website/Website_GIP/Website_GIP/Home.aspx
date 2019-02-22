@@ -95,10 +95,10 @@
                 <asp:TextBox ID="TbPassword" runat="server" TextMode="Password" Width="100%">Wachtwoord</asp:TextBox>
                 <br />
                 <br />
-                <asp:Button ID="BtnLogin" runat="server" Text="Login" Width="75%"/>
+                <asp:Button ID="BtnLogin" runat="server" Text="Login" Width="75%" OnClick="BtnLogin_Click1"/>
                 <br />
                 <br />
-                <asp:Button ID="BtnRegister" runat="server" Text="Registreer" Width="75%" />
+                <asp:Button ID="BtnRegister" runat="server" Text="Registreer" Width="75%" OnClick="BtnRegister_Click1" />
                 <br />
                 <br />
                 <asp:Label ID="LblUser" runat="server" Text="Log in om persoonlijke metingen te zien!"></asp:Label>

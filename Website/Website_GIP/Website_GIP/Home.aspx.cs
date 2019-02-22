@@ -18,12 +18,30 @@ namespace Website_GIP
 
         }
 
-        protected void BtnLogin_Click(object sender, ImageClickEventArgs e)
+        private void DrawMap(string user)
+        {
+
+        }
+
+        private string ComputeHash(string input)
+        {
+            SHA512 shaM = new SHA512Managed();
+            byte[] bytes = shaM.ComputeHash(Encoding.ASCII.GetBytes(input));
+
+            StringBuilder result = new StringBuilder(bytes.Length * 2);
+
+            for (int i = 0; i < bytes.Length; i++)
+                result.Append(bytes[i].ToString("x2"));
+
+            return result.ToString();
+        }
+
+        protected void BtnLogin_Click1(object sender, EventArgs e)
         {
             string loginFail = "Verkeerde wachtwoord of gebruikersnaam!";
             string alreadyLoggedIn = "U bent al ingelogd!";
 
-            if(Convert.ToBoolean(ViewState["Login"]))
+            if (Convert.ToBoolean(ViewState["Login"]))
                 Response.Write("<script>alert('" + alreadyLoggedIn + "')</script>");
 
             else if (ComputeHash(TbUser.Text + TbPassword.Text) == db.ValidateUser(TbUser.Text))
@@ -40,32 +58,9 @@ namespace Website_GIP
             }
         }
 
-        protected void BtnRegister_Click(object sender, ImageClickEventArgs e)
+        protected void BtnRegister_Click1(object sender, EventArgs e)
         {
             Response.Redirect("Register.aspx");
-        }
-
-        private void DrawMap(string user)
-        {
-            //string[,] data = db.getUserData(user);
-            string lat = "51.152487";
-            string lng = "4.512685";
-            string func = string.Format("{lat: {0}, lng: {1}}", lat, lng);
-
-            Page.ClientScript.RegisterStartupScript(GetType(),"test","drawMarker(" + func + ");", true);
-        }
-
-        private string ComputeHash(string input)
-        {
-            SHA512 shaM = new SHA512Managed();
-            byte[] bytes = shaM.ComputeHash(Encoding.ASCII.GetBytes(input));
-
-            StringBuilder result = new StringBuilder(bytes.Length * 2);
-
-            for (int i = 0; i < bytes.Length; i++)
-                result.Append(bytes[i].ToString("x2"));
-
-            return result.ToString();
         }
     }
 }
