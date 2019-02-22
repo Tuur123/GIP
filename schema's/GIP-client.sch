@@ -1313,22 +1313,23 @@ Grid 2.54 mm&lt;p&gt;
 <wire x1="-27.94" y1="43.18" x2="-20.32" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="-20.32" y1="43.18" x2="-20.32" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="-20.32" y1="40.64" x2="-5.08" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="VCC"/>
+<wire x1="-27.94" y1="27.94" x2="-5.08" y2="27.94" width="0.1524" layer="91"/>
+<wire x1="-5.08" y1="27.94" x2="-5.08" y2="40.64" width="0.1524" layer="91"/>
+<junction x="-5.08" y="40.64"/>
 </segment>
 </net>
 <net name="N$14" class="0">
 <segment>
-<wire x1="-15.24" y1="5.08" x2="-15.24" y2="27.94" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="3V"/>
-<wire x1="-15.24" y1="27.94" x2="-15.24" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="-15.24" y1="5.08" x2="-15.24" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="-15.24" y1="50.8" x2="5.08" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="U$4" gate="G$1" pin="VCC"/>
-<wire x1="-27.94" y1="27.94" x2="-15.24" y2="27.94" width="0.1524" layer="91"/>
-<junction x="-15.24" y="27.94"/>
 <pinref part="U$5" gate="G$1" pin="VCC"/>
 <wire x1="-15.24" y1="5.08" x2="93.98" y2="5.08" width="0.1524" layer="91"/>
 <pinref part="SV1" gate="1" pin="5"/>
 <wire x1="-50.8" y1="0" x2="-15.24" y2="0" width="0.1524" layer="91"/>
 <wire x1="-15.24" y1="0" x2="-15.24" y2="5.08" width="0.1524" layer="91"/>
+<junction x="-15.24" y="5.08"/>
 </segment>
 </net>
 <net name="N$15" class="0">
