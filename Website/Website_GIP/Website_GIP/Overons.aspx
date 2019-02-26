@@ -1,16 +1,22 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Overons.aspx.cs" Inherits="Website_GIP.Overons" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <title>Luchtkwaliteit</title>
 </head>
 <body>
+    <form id="form1" runat="server">
     <div class="header">
-        <img src="logo_Luchtkwaliteit.png" />
+           <asp:ImageButton id="home" runat="server"
+           ImageUrl="logo_Luchtkwaliteit.png"
+           OnClick="ImageButton_Click"/>
     </div>
     <div class="topnav">
-        <form id="form1" runat="server">
     </div>
     <div class="row">
         <div class="leftcolumn">
@@ -19,21 +25,6 @@
             </div>
         </div>
         <div class="rightcolumn">
-            <div class="card">
-                <asp:TextBox ID="TbUser" runat="server" Width="100%">gebruikersnaam</asp:TextBox>
-                <br />
-                <br />
-                <asp:TextBox ID="TbPassword" runat="server" TextMode="Password" Width="100%">Wachtwoord</asp:TextBox>
-                <br />
-                <br />
-                <asp:Button ID="BtnLogin" runat="server" Text="Login" Width="75%" OnClick="BtnLogin_Click1" />
-                <br />
-                <br />
-                <asp:Button ID="BtnRegister" runat="server" Text="Registreer" Width="75%" OnClick="BtnRegister_Click1" />
-                <br />
-                <br />
-                <asp:Label ID="LblUser" runat="server" Text="Log in om persoonlijke metingen te zien!"></asp:Label>
-            </div>
             <div class="card">
                 <article class="ac-aircheckr-widget"
                          data-current-location="undifined" data-level="street" data-locale="nl_BE" data-theme="dark"

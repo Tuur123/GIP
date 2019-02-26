@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Home.aspx" />
+    <Content Include="Overons.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
@@ -82,6 +83,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Overons.aspx.cs">
+      <DependentUpon>Overons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Overons.aspx.designer.cs">
+      <DependentUpon>Overons.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">

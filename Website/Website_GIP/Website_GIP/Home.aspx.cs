@@ -65,7 +65,12 @@ namespace Website_GIP
 
         protected void BtnOverons_Click1(object sender, EventArgs e)
         {
-            Response.Redirect("Overons.html");
+            Response.Redirect("Overons.aspx");
+        }
+
+        protected void ImageButton_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 }

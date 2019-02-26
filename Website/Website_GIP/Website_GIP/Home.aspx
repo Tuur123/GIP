@@ -15,11 +15,13 @@
 </head>
 
 <body>
+    <form id="form1" runat="server">
     <div class="header">
-        <img src="logo_Luchtkwaliteit.png"/>
+           <asp:ImageButton id="home" runat="server"
+           ImageUrl="logo_Luchtkwaliteit.png"
+           OnClick="ImageButton_Click"/>
     </div>
     <div class="topnav">
-    <form id="form1" runat="server">
     </div>
     <div class="row">
         <div class="leftcolumn">
