@@ -19,7 +19,7 @@
         <img src="logo_Luchtkwaliteit.png"/>
     </div>
     <div class="topnav">
-
+    <form id="form1" runat="server">
     </div>
     <div class="row">
         <div class="leftcolumn">
@@ -83,7 +83,6 @@
         </div>
         <div class="rightcolumn">
             <div class="card">
-            <form id="form1" runat="server">
                 <asp:TextBox ID="TbUser" runat="server" Width="100%">gebruikersnaam</asp:TextBox>
                 <br />
                 <br />
@@ -97,7 +96,6 @@
                 <br />
                 <br />
                 <asp:Label ID="LblUser" runat="server" Text="Log in om persoonlijke metingen te zien!"></asp:Label>
-            </form>
             </div>
             <div class="card">
                 <article class="ac-aircheckr-widget"
@@ -112,8 +110,10 @@
                 </div>
             </div>
         </div>  
-<div class="footer">
-  <h2>Footer</h2>
-</div>
+    <div class="footer">
+        <h2>Footer</h2>
+        <asp:Button ID="BtnOverons" runat="server" Text="Over ons" Width="75%" OnClick="BtnOverons_Click1"/>
+    </div>
+    </form>
 </body>
 </html>
