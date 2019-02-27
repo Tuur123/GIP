@@ -38,6 +38,7 @@
                     });
 
                     // Code voor de marker
+                     var t = '<%= DrawMap() %>';
                     var geojson = {
                         type: 'FeatureCollection',
                         features: [{

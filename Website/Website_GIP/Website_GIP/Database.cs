@@ -56,10 +56,12 @@ public class Database
         return result;
     }
 
-    public string[,] getUserData(string name)
+    public string getUserData(string name)
     {
-        string query = string.Format("SELECT Locatie, Vochtigheid, Temperatuur, CO2, Lichtsterke, Tijd FROM Waardes WHERE Naam ='{0}'", name);
-        string[,] result = null;
+        //string query = string.Format("SELECT Locatie, Vochtigheid, Temperatuur, CO2, Lichtsterke, Tijd FROM Waardes WHERE id=860", name);
+        string query = string.Format("SELECT Breedtegraad FROM Waardes WHERE id=860");
+
+        string result = null;
 
         try
         {
@@ -71,14 +73,14 @@ public class Database
             command.Connection = connection;
             command.CommandText = query;
             OleDbDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
+            result = reader.ToString();
+            /*while (reader.Read())
             {
                 int j = 0;
                 for (int i = 0; i < 6; i++)
                     result[j, i] = reader[i].ToString();
                 j++;                                             
-            }
+            }*/
             connection.Close();
 
             /*nummer        locatie     vochtigheid     temp     c02     lichsterkte     tijd

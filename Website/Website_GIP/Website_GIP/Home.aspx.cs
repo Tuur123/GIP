@@ -18,9 +18,10 @@ namespace Website_GIP
 
         }
 
-        private void DrawMap(string user)
+        public void DrawMap(string user)
         {
-
+            string result = db.getUserData(user);
+            
         }
 
         private string ComputeHash(string input)

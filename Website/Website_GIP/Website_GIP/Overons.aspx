@@ -33,7 +33,7 @@
                 <script src="https://widget.aircheckr.com/js/client.widget.js"></script>
             </div>
             <div class="card">
-
+                
             </div>
         </div>
     </div>
