@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Website_GIP.Home" %>
+﻿ <%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Website_GIP.Home" %>
 
 <!DOCTYPE html>
 
@@ -30,22 +30,23 @@
                 <script>
                     mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
 
+                    
                     var map = new mapboxgl.Map({
                         container: 'map',
                         style: 'mapbox://styles/mapbox/streets-v9',
                         center: [4.471421, 51.386688],
                         zoom: 13
                     });
-
+                    alert("<%=result %>");
                     // Code voor de marker
-                     var t = '<%= DrawMap() %>';
+
                     var geojson = {
                         type: 'FeatureCollection',
                         features: [{
                             type: 'Feature',
                             geometry: {
                                 type: 'Point',
-                                coordinates: [4.471421, 51.386688]
+                                coordinates: ["4.471421", ("<%=result %>").valueOf()]
                             },
                             properties: {
                                 title: 'Mapbox',

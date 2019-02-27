@@ -12,15 +12,16 @@ namespace Website_GIP
     public partial class Home : System.Web.UI.Page
     {
         Database db = new Database();
+        public string result;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            result = db.getUserData("ruben");
+            //result = "51.54584";
         }
 
         public void DrawMap(string user)
         {
-            string result = db.getUserData(user);
             
         }
 
