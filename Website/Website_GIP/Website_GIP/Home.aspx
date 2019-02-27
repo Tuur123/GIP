@@ -37,20 +37,52 @@
                         center: [4.471421, 51.386688],
                         zoom: 13
                     });
-                    alert("<%=result %>");
+                    map.on('load', function () {
+ 
+map.addLayer({
+'id': 'population',
+'type': 'circle',
+'source': {
+type: 'vector',
+url: 'mapbox://examples.8fgz4egr'
+},
+'source-layer': 'sf2010',
+'paint': {
+// make circles larger as the user zooms from z12 to z22
+'circle-radius': {
+'base': 1.75,
+'stops': [[12, 2], [22, 180]]
+},
+// color circles by ethnicity, using a match expression
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+'circle-color': [
+'match',
+['get', 'ethnicity'],
+'White', '#fbb03b',
+'Black', '#223b53',
+'Hispanic', '#e55e5e',
+'Asian', '#3bb2d0',
+/* other */ '#ccc'
+]
+}
+});
+});
                     // Code voor de marker
-
                     var geojson = {
                         type: 'FeatureCollection',
                         features: [{
                             type: 'Feature',
                             geometry: {
                                 type: 'Point',
-                                coordinates: ["4.471421", ("<%=result %>").valueOf()]
+                                coordinates: [("<%=result[1] %>").valueOf(), ("<%=result[0] %>").valueOf()]
                             },
                             properties: {
-                                title: 'Mapbox',
-                                description: 'Washington, D.C.'
+                                title: 'Meeting door: '+ ("<%=result[2] %>").valueOf(),
+                                description: 'Temperatuur: ' + ("<%=result[3] %>").valueOf()
+                                    + '<br\>Vochtigheid: ' + ("<%=result[4] %>").valueOf()
+                                    + '<br\>CO²: ' + ("<%=result[5] %>").valueOf()
+                                    + '<br\>Lichtsterkte: ' + ("<%=result[6] %>").valueOf()
+                                    + '<br\>Tijd van meting: ' + ("<%=result[7] %>").valueOf()
                             }
                         },
                         {
@@ -60,8 +92,8 @@
                                 coordinates: [4, 51]
                             },
                             properties: {
-                                title: 'Meeting door: Ruben',
-                                description: 'San Francisco, California'
+                                title: 'Meeting door: '+ ("<%=result[2] %>").valueOf(),
+                                description: 'CO2: ' 
                             }
                         }]
                     };
@@ -78,6 +110,7 @@
                                 .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
                             .addTo(map);
                     });
+
                     map.addControl(new mapboxgl.NavigationControl());
             </script>
             </div>
