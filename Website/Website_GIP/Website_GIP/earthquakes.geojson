@@ -6111,3 +6111,4 @@
 { "type": "Feature", "properties": { "id": "hv61900626", "mag": 2.91, "time": 1504833891990, "felt": null, "tsunami": 0 }, "geometry": { "type": "Point", "coordinates": [ -155.011833, 19.399333, 2.609 ] } }
 ]
 }
+https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson
