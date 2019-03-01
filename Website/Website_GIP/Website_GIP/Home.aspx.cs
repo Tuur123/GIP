@@ -16,7 +16,7 @@ namespace Website_GIP
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            result = db.getUserData("ruben");           
+            result = db.GetUserData("ruben");           
         }
 
         public void DrawMap(string user)
