@@ -181,7 +181,7 @@
                     <h2>Grafieken</h2>
                     <asp:Chart ID="ChartTemp" runat="server" DataSourceID="Db">
                         <Series>
-                            <asp:Series ChartType="Spline" Name="Temperatuur" XValueMember="Temperatuur" YValueMembers="Tijd" YAxisType="Primary">
+                            <asp:Series ChartType="Spline" Name="Temperatuur" XValueMember="Temperatuur" YValueMembers="Tijd">
                             </asp:Series>
                         </Series>
                         <ChartAreas>
