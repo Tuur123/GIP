@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Text;
 using System.Data.OleDb;
 
 public class Database
 {
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.accdb;Persist Security Info = False;";
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ..\Database.accdb;Persist Security Info = False;";
     
-
     public Database()
 	{
 
@@ -20,9 +18,11 @@ public class Database
         connection.ConnectionString = connString;
         connection.Open();
 
-        OleDbCommand command = new OleDbCommand();
-        command.Connection = connection;
-        command.CommandText = query;
+        OleDbCommand command = new OleDbCommand
+        {
+            Connection = connection,
+            CommandText = query
+        };
         command.ExecuteNonQuery();
         connection.Close();
     }
@@ -38,9 +38,11 @@ public class Database
             connection.ConnectionString = connString;
             connection.Open();
 
-            OleDbCommand command = new OleDbCommand();
-            command.Connection = connection;
-            command.CommandText = query;
+            OleDbCommand command = new OleDbCommand
+            {
+                Connection = connection,
+                CommandText = query
+            };
             OleDbDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -69,9 +71,11 @@ public class Database
             connection.ConnectionString = connString;
             connection.Open();
 
-            OleDbCommand command = new OleDbCommand();
-            command.Connection = connection;
-            command.CommandText = query;
+            OleDbCommand command = new OleDbCommand
+            {
+                Connection = connection,
+                CommandText = query
+            };
             OleDbDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -79,11 +83,9 @@ public class Database
                 for (int x = 0; x < 8; x++)
                 {
                     result[x] = reader[x].ToString();
-                }
-                                                             
+                }                                                         
             }
             connection.Close();
-
         }
         catch (Exception e)
         {
