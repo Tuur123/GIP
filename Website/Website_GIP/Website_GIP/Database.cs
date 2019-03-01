@@ -56,10 +56,10 @@ public class Database
         return result;
     }
 
-    public string[] getUserData(string name)
+    public string[] GetUserData(string name)
     {
         //string query = string.Format("SELECT Locatie, Vochtigheid, Temperatuur, CO2, Lichtsterke, Tijd FROM Waardes WHERE id=860", name);
-        string query = string.Format("SELECT Breedtegraad, Lengtegraad, Gebruiker, Vochtigheid, Temperatuur, CO2, Lichtsterkte, Tijd FROM Waardes WHERE id=860");
+        string query = string.Format("SELECT Breedtegraad, Lengtegraad, Gebruiker, Vochtigheid, Temperatuur, CO2, Lichtsterkte, Tijd FROM Waardes WHERE Gebruiker='{0}'", name);
 
         string[] result = new string[8];
 
