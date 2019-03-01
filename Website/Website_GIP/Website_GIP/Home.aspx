@@ -179,17 +179,24 @@
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
-                    <asp:Chart ID="ChartTemp" runat="server" DataSourceID="Db">
+                    <asp:Chart ID="ChartTemp" runat="server" DataSourceID="Db" Width="1090px" >
+                        <Legends>
+                            <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
+                                LegendStyle="Row" />
+                        </Legends>
                         <Series>
-                            <asp:Series ChartType="Spline" Name="Temperatuur" XValueMember="Temperatuur" YValueMembers="Tijd">
+                            <asp:Series ChartType="Spline" Name="Temperatuur" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="Temperatuur">
+                            </asp:Series>
+                            <asp:Series ChartType="Spline" Name="Vochtigheid" XValueMember="Tijd" YValueMembers="Vochtigheid">
                             </asp:Series>
                         </Series>
                         <ChartAreas>
                             <asp:ChartArea Name="ChartArea1">
+                                <AxisX Interval="50"></AxisX>
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" ProviderName="<%$ ConnectionStrings:DatabaseConnectionString.ProviderName %>" SelectCommand="SELECT DISTINCT [Vochtigheid], [Temperatuur], [CO2], [Lichtsterkte], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
+                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringRuben %>" ProviderName="<%$ ConnectionStrings:ConnectionStringRuben.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Lichtsterkte], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
                         <SelectParameters>
                             <asp:ControlParameter ControlID="TbUser" Name="Gebruiker" PropertyName="Text" Type="String" />
                         </SelectParameters>
