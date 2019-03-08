@@ -137,7 +137,7 @@
                                 type: 'Feature',
                                 geometry: {
                                     type: 'Point',
-                                    coordinates: [("<%=result[1] %>").valueOf(), ("<%=result[0] %>").valueOf()]
+                                    coordinates: [("<%=result[0] %>").valueOf(), ("<%=result[1] %>").valueOf()]
                                 },
                                 properties: {
                                     title: 'Meeting door: ' + ("<%=result[2] %>").valueOf(),
@@ -196,9 +196,9 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringRuben %>" ProviderName="<%$ ConnectionStrings:ConnectionStringRuben.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Lichtsterkte], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
+                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringArthur %>" ProviderName="<%$ ConnectionStrings:ConnectionStringArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Lichtsterkte], [Tijd], [Breedtegraad], [Lengtegraad] FROM [Waardes] WHERE ([Gebruiker] = ?)">
                         <SelectParameters>
-                            <asp:ControlParameter ControlID="TbUser" Name="Gebruiker" PropertyName="Text" Type="String" />
+                            <asp:ControlParameter ControlID="TbUser" Name="Gebruiker" PropertyName="Text" Type="String" DefaultValue="ruben" />
                         </SelectParameters>
                     </asp:SqlDataSource>
                 </div>
