@@ -21,8 +21,6 @@ public class Database
             };
 
             command.ExecuteNonQuery();
-
-
         }
         catch (OleDbException error)
         {
@@ -31,6 +29,14 @@ public class Database
         finally
         {
             connection.Close();
+
+            // step 1: lees Json van User in
+
+            // step 2: voeg laatste meting aan Json toe
+
+            // step 3: save de Json file
+
+            // step 4: profit
         }
     }
 }

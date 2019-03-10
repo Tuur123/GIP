@@ -16,12 +16,12 @@ namespace Website_GIP
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            result = db.GetUserData("ruben");           
+                    
         }
 
         public void DrawMap(string user)
         {
-            
+            result = db.GetUserData(user);
         }
 
         private string ComputeHash(string input)
