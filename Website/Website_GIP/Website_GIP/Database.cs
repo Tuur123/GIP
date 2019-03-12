@@ -3,8 +3,8 @@ using System.Data.OleDb;
 
 public class Database
 {
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ..\Database.accdb; Persist Security Info = False;";
-    
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Desktop\Database.accdb; Persist Security Info = False;";
+
     public Database()
 	{
 
@@ -29,7 +29,7 @@ public class Database
 
     public string ValidateUser(string name)
     {
-        string query = string.Format("SELECT Hash, Naam FROM Users WHERE Naam ='{0}'", name);
+        string query = string.Format("SELECT Hash FROM Users WHERE Naam ='{0}'", name);
         string result = null;
 
         try

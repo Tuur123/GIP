@@ -37,7 +37,7 @@ namespace Website_GIP
             return result.ToString();
         }
 
-        protected void BtnLogin_Click1(object sender, EventArgs e)
+        protected void BtnLogin_Click(object sender, EventArgs e)
         {
             string loginFail = "Verkeerde wachtwoord of gebruikersnaam!";
             string alreadyLoggedIn = "U bent al ingelogd!";
@@ -51,6 +51,8 @@ namespace Website_GIP
                 ViewState["Login"] = true;
                 //DrawMap(TbUser.Text);
                 LblUser.Text = TbUser.Text;
+
+                DrawMap(TbUser.Text);
             }
             else
             {
@@ -59,12 +61,12 @@ namespace Website_GIP
             }
         }
 
-        protected void BtnRegister_Click1(object sender, EventArgs e)
+        protected void BtnRegister_Click(object sender, EventArgs e)
         {
             Response.Redirect("Register.aspx");
         }
 
-        protected void BtnOverons_Click1(object sender, EventArgs e)
+        protected void BtnOverons_Click(object sender, EventArgs e)
         {
             Response.Redirect("Overons.aspx");
         }

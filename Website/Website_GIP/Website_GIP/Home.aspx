@@ -46,7 +46,7 @@
                                 type: 'Feature',
                                 geometry: {
                                     type: 'Point',
-                                    coordinates: [("<%=result[0] %>").valueOf(), ("<%=result[1] %>").valueOf()]
+                                    coordinates: [("<%=result[1] %>").valueOf(), ("<%=result[0] %>").valueOf()]
                                 },
                                 properties: {
                                     title: 'Meeting door: ' + ("<%=result[2] %>").valueOf(),
@@ -56,24 +56,9 @@
                                         + '<br\>Lichtsterkte: ' + ("<%=result[6] %>").valueOf()
                                         + '<br\>Tijd van meting: ' + ("<%=result[7] %>").valueOf()
                                 }
-                            },
-                                {
-                                    type: 'Feature',
-                                    geometry: {
-                                        type: 'Point',
-                                        coordinates: [4, 51]
-                                    },
-                                    properties: {
-                                    title: 'Meeting door: ' + ("<%=result[2] %>").valueOf(),
-                                    description: 'Temperatuur: ' + ("<%=result[4] %>").valueOf()
-                                        + '<br\>Vochtigheid: ' + ("<%=result[3] %>").valueOf()
-                                        + '<br\>CO²: ' + ("<%=result[5] %>").valueOf()
-                                        + '<br\>Lichtsterkte: ' + ("<%=result[6] %>").valueOf()
-                                        + '<br\>Tijd van meting: ' + ("<%=result[7] %>").valueOf()
-                                }
-                                }]
+                            }]
                         };
-                        
+
                         // haalt de markers uit de JSON file, elke 'feature' is een marker
                         geojson.features.forEach(function (marker) {
                             // HTML element maken voor elke feature
@@ -121,10 +106,10 @@
                     <asp:TextBox ID="TbPassword" runat="server" TextMode="Password" Width="100%">Wachtwoord</asp:TextBox>
                     <br />
                     <br />
-                    <asp:Button ID="BtnLogin" runat="server" Text="Login" Width="75%" OnClick="BtnLogin_Click1" />
+                    <asp:Button ID="BtnLogin" runat="server" Text="Login" Width="75%" OnClick="BtnLogin_Click" />
                     <br />
                     <br />
-                    <asp:Button ID="BtnRegister" runat="server" Text="Registreer" Width="75%" OnClick="BtnRegister_Click1" />
+                    <asp:Button ID="BtnRegister" runat="server" Text="Registreer" Width="75%" OnClick="BtnRegister_Click" />
                     <br />
                     <br />
                     <asp:Label ID="LblUser" runat="server" Text="Log in om persoonlijke metingen te zien!"></asp:Label>
@@ -143,7 +128,7 @@
         </div>
         <div class="footer">
             <h2>Footer</h2>
-            <asp:Button ID="BtnOverons" runat="server" Text="Over ons" Width="75%" OnClick="BtnOverons_Click1" />
+            <asp:Button ID="BtnOverons" runat="server" Text="Over ons" Width="75%" OnClick="BtnOverons_Click" />
         </div>
     </form>
 </body>
