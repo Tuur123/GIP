@@ -39,6 +39,10 @@
                             zoom: 10
                         });
 
+                        // DIT IN LOOP ZETTEN---------------------------
+                        // elke groep meetwaardes apart in json zetten, op map zetten door index uit c# te gebruiken
+                        // we gebruiken wat in de loop moet nu 1 keer, we gaan er gewoon een for loop van maken.
+                        // niet het efficientste maar wel de enige oplossing
                         // Code voor de marker
                         var geojson = {
                             type: 'FeatureCollection',
@@ -69,12 +73,13 @@
                             new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).setPopup(new mapboxgl.Popup({ offset: 25 })
                                 .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>')).addTo(map);
                         });
+                        //DIT IN LOOP ZETTEN------------------------------------------------
                         //control voor navigatie
                         map.addControl(new mapboxgl.NavigationControl());</script>
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
-                    <asp:Chart ID="ChartTemp" runat="server" DataSourceID="Db" Width="1090px">
+                    <asp:Chart ID="ChartTemp" runat="server" DataSourceID="Db" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
                         <Legends>
                             <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
                                 LegendStyle="Row" />
@@ -82,7 +87,9 @@
                         <Series>
                             <asp:Series ChartType="Spline" Name="Temperatuur" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="Temperatuur">
                             </asp:Series>
-                            <asp:Series ChartType="Spline" Name="Vochtigheid" XValueMember="Tijd" YValueMembers="Vochtigheid">
+                            <asp:Series ChartType="Spline" Name="Vochtigheid" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="Vochtigheid">
+                            </asp:Series>
+                             <asp:Series ChartType="Spline" Name="CO2" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="CO2">
                             </asp:Series>
                         </Series>
                         <ChartAreas>
@@ -91,7 +98,7 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringArthur %>" ProviderName="<%$ ConnectionStrings:ConnectionStringArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Lichtsterkte], [Tijd], [Breedtegraad], [Lengtegraad] FROM [Waardes] WHERE ([Gebruiker] = ?)">
+                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringArthur %>" ProviderName="<%$ ConnectionStrings:ConnectionStringArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [Lichtsterkte], [CO2], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
                         <SelectParameters>
                             <asp:ControlParameter ControlID="TbUser" Name="Gebruiker" PropertyName="Text" Type="String" DefaultValue="ruben" />
                         </SelectParameters>

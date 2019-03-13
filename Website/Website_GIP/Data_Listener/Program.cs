@@ -14,7 +14,7 @@ namespace Data_Listener
     {
         static void Main(string[] args)
         {
-            Database db = new Database();
+            Database_Listener db = new Database_Listener();
 
             //code om met meerdere clients te communiceren
             while (true)
