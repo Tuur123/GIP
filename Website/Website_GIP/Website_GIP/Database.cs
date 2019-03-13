@@ -58,12 +58,12 @@ public class Database
         return result;
     }
 
-    public string[] GetUserData(string name)
+    public string[,] GetUserData(string name)
     {
         //string query = string.Format("SELECT Locatie, Vochtigheid, Temperatuur, CO2, Lichtsterke, Tijd FROM Waardes WHERE id=860", name);
         string query = string.Format("SELECT Breedtegraad, Lengtegraad, Gebruiker, Vochtigheid, Temperatuur, CO2, Lichtsterkte, Tijd FROM Waardes WHERE Gebruiker='{0}'", name);
-
-        string[] result = new string[8];
+        string[,] result = { { "" } };
+        int i = 0;
 
         try
         {
@@ -82,8 +82,9 @@ public class Database
             {
                 for (int x = 0; x < 8; x++)
                 {
-                    result[x] = reader[x].ToString();
-                }                                                         
+                    result[i, x] = reader[x].ToString();
+                }
+                i++;
             }
             connection.Close();
         }
@@ -91,7 +92,7 @@ public class Database
         {
             Console.WriteLine(e.Message);
 
-            return result;
+            return null;
         }
 
         return result;

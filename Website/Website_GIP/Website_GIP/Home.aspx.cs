@@ -12,7 +12,7 @@ namespace Website_GIP
     public partial class Home : System.Web.UI.Page
     {
         Database db = new Database();
-        public string[] result = new string[8];
+        public string[,] result;
 
         protected void Page_Load(object sender, EventArgs e)
         {
