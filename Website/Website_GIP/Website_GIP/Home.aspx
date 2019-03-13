@@ -39,30 +39,8 @@
                             zoom: 10
                         });
 
-                        for (int i = 0; i < ("<%=result.GetLength(0) %>").valueOf(); i++) {
-                            // DIT IN LOOP ZETTEN---------------------------
-                        // elke groep meetwaardes apart in json zetten, op map zetten door index uit c# te gebruiken
-                        // we gebruiken wat in de loop moet nu 1 keer, we gaan er gewoon een for loop van maken.
-                        // niet het efficientste maar wel de enige oplossing
                         // Code voor de marker
-                        var geojson = {
-                            type: 'FeatureCollection',
-                            features: [{
-                                type: 'Feature',
-                                geometry: {
-                                    type: 'Point',
-                                    coordinates: [("<%=result[i, 1] %>").valueOf(), ("<%=result[i, 0] %>").valueOf()]
-                                },
-                                properties: {
-                                    title: 'Meeting door: ' + ("<%=result[2] %>").valueOf(),
-                                    description: 'Temperatuur: ' + ("<%=result[4] %>").valueOf()
-                                        + '<br\>Vochtigheid: ' + ("<%=result[3] %>").valueOf()
-                                        + '<br\>CO²: ' + ("<%=result[5] %>").valueOf()
-                                        + '<br\>Lichtsterkte: ' + ("<%=result[6] %>").valueOf()
-                                        + '<br\>Tijd van meting: ' + ("<%=result[7] %>").valueOf()
-                                }
-                            }]
-                        };
+                        var geojson = <%=result%>;
 
                         // haalt de markers uit de JSON file, elke 'feature' is een marker
                         geojson.features.forEach(function (marker) {
@@ -74,8 +52,7 @@
                             new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).setPopup(new mapboxgl.Popup({ offset: 25 })
                                 .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>')).addTo(map);
                         });
-                        //DIT IN LOOP ZETTEN------------------------------------------------
-                        }                       
+
                         //control voor navigatie
                         map.addControl(new mapboxgl.NavigationControl());</script>
                 </div>
