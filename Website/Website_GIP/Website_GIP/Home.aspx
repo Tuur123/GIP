@@ -39,7 +39,8 @@
                             zoom: 10
                         });
 
-                        // DIT IN LOOP ZETTEN---------------------------
+                        for (int i = 0; i < ("<%=result.GetLength(0) %>").valueOf(); i++) {
+                            // DIT IN LOOP ZETTEN---------------------------
                         // elke groep meetwaardes apart in json zetten, op map zetten door index uit c# te gebruiken
                         // we gebruiken wat in de loop moet nu 1 keer, we gaan er gewoon een for loop van maken.
                         // niet het efficientste maar wel de enige oplossing
@@ -50,7 +51,7 @@
                                 type: 'Feature',
                                 geometry: {
                                     type: 'Point',
-                                    coordinates: [("<%=result[1] %>").valueOf(), ("<%=result[0] %>").valueOf()]
+                                    coordinates: [("<%=result[i, 1] %>").valueOf(), ("<%=result[i, 0] %>").valueOf()]
                                 },
                                 properties: {
                                     title: 'Meeting door: ' + ("<%=result[2] %>").valueOf(),
@@ -74,6 +75,7 @@
                                 .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>')).addTo(map);
                         });
                         //DIT IN LOOP ZETTEN------------------------------------------------
+                        }                       
                         //control voor navigatie
                         map.addControl(new mapboxgl.NavigationControl());</script>
                 </div>
