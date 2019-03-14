@@ -30,7 +30,26 @@
                 <div class="card">
                     <div id='map'></div>
                     <!--<script src="map.js"></script>-->
+                    <script src="jquery.js"></script>
                     <script>mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
+
+                        var geojson = {
+                        type: 'FeatureCollection',
+                            features: [
+                                {
+                                    type: 'Feature',
+                                    geometry: {
+                                        type: 'Point',
+                                        coordinates: [
+                                            4.474796, 51.392509
+                                        ]
+                                    },
+                                    properties: {
+                                        title: 'Gemeten door Ruben',
+                                        description: 'Please werk aub'
+                                    }
+                                }]
+                            };
 
                         var map = new mapboxgl.Map({
                             container: 'map',
@@ -39,9 +58,7 @@
                             zoom: 10
                         });
 
-                        // Code voor de marker
-                        var geojson = <%=result%>;
-
+                        
                         // haalt de markers uit de JSON file, elke 'feature' is een marker
                         geojson.features.forEach(function (marker) {
                             // HTML element maken voor elke feature
@@ -54,7 +71,8 @@
                         });
 
                         //control voor navigatie
-                        map.addControl(new mapboxgl.NavigationControl());</script>
+                        map.addControl(new mapboxgl.NavigationControl());
+                    </script>
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
