@@ -72,7 +72,7 @@ void loop()
   CCS_811();
   DHT11();
   printData();
-  senddata();
+  //senddata();
 }
 void DHT11()
 {

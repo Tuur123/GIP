@@ -23,4 +23,5 @@ void loop()
       Serial.println(gps.location.lng(), 6);
     }
   }
+  Serial.println("ERROR");
 }
