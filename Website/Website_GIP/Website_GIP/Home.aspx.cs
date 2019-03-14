@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Text;
+using System.IO;
 using System.Web.UI.WebControls;
 using System.Security.Cryptography;
 
@@ -12,18 +13,8 @@ namespace Website_GIP
     public partial class Home : System.Web.UI.Page
     {
         Database db = new Database();
-        public string[] result = new string[8];
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            result = db.GetUserData("ruben");           
-        }
-
-        public void DrawMap(string user)
-        {
-            
-        }
-
+        public string markers;
+        string serverPath = @"C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\";
         private string ComputeHash(string input)
         {
             SHA512 shaM = new SHA512Managed();
@@ -37,34 +28,35 @@ namespace Website_GIP
             return result.ToString();
         }
 
-        protected void BtnLogin_Click1(object sender, EventArgs e)
+        protected void BtnLogin_Click(object sender, EventArgs e)
         {
-            string loginFail = "Verkeerde wachtwoord of gebruikersnaam!";
-            string alreadyLoggedIn = "U bent al ingelogd!";
+            string[] loginMessage = { "Verkeerde wachtwoord of gebruikersnaam!", "U bent al ingelogd!" };
 
             if (Convert.ToBoolean(ViewState["Login"]))
-                Response.Write("<script>alert('" + alreadyLoggedIn + "')</script>");
+                Response.Write("<script>alert('" + loginMessage[1] + "')</script>");
 
             else if (ComputeHash(TbUser.Text + TbPassword.Text) == db.ValidateUser(TbUser.Text))
             {
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;
-                //DrawMap(TbUser.Text);
                 LblUser.Text = TbUser.Text;
+                markers = db.GetUserData(TbUser.Text);
+                StreamWriter writer = new StreamWriter(serverPath + TbUser.Text);
+                writer.Write(markers);
             }
             else
             {
                 //user heeft ongeldige gegevens.
-                Response.Write("<script>alert('" + loginFail + "')</script>");
+                Response.Write("<script>alert('" + loginMessage[0] + "')</script>");
             }
         }
 
-        protected void BtnRegister_Click1(object sender, EventArgs e)
+        protected void BtnRegister_Click(object sender, EventArgs e)
         {
             Response.Redirect("Register.aspx");
         }
 
-        protected void BtnOverons_Click1(object sender, EventArgs e)
+        protected void BtnOverons_Click(object sender, EventArgs e)
         {
             Response.Redirect("Overons.aspx");
         }

@@ -1,14 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.OleDb;
+using Newtonsoft.Json;
 
 public class Database
 {
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ..\Database.accdb;Persist Security Info = False;";
-    
-    public Database()
-	{
-
-	}
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Desktop\Database.mdb; Persist Security Info = False;";
 
     public void AddUser(string hash, string name)
     {
@@ -29,7 +26,7 @@ public class Database
 
     public string ValidateUser(string name)
     {
-        string query = string.Format("SELECT Hash, Naam FROM Users WHERE Naam ='{0}'", name);
+        string query = string.Format("SELECT Hash FROM Users WHERE Naam ='{0}'", name);
         string result = null;
 
         try
@@ -58,13 +55,14 @@ public class Database
         return result;
     }
 
-    public string[] GetUserData(string name)
+    public string GetUserData(string name)
     {
-        //string query = string.Format("SELECT Locatie, Vochtigheid, Temperatuur, CO2, Lichtsterke, Tijd FROM Waardes WHERE id=860", name);
+        RootObject rootObject = new RootObject();
+        List<Feature> features = new List<Feature>();
+
         string query = string.Format("SELECT Breedtegraad, Lengtegraad, Gebruiker, Vochtigheid, Temperatuur, CO2, Lichtsterkte, Tijd FROM Waardes WHERE Gebruiker='{0}'", name);
-
-        string[] result = new string[8];
-
+        string json = "";
+        
         try
         {
             OleDbConnection connection = new OleDbConnection();
@@ -78,22 +76,86 @@ public class Database
             };
             OleDbDataReader reader = command.ExecuteReader();
 
+            string[] data = new string[8];
+            string desc;
+
             while (reader.Read())
             {
+                List<double> coords = new List<double>();
+
                 for (int x = 0; x < 8; x++)
+                {    
+                    // Lat, Long, User, Vochtigheid, Temp, CO2, Licht, Time
+                    data[x] = reader[x].ToString();                   
+                }
+
+                data[0] = data[0].Replace('.', ',');
+                data[1] = data[1].Replace('.', ',');
+
+                coords.Add(Convert.ToDouble(data[0]));
+                coords.Add(Convert.ToDouble(data[1]));
+
+                desc = "Please werk aub";
+                /*
+                desc = string.Format(@"Temperatuur: {1}
+                + <br\>Vochtigheid: {0}
+                + <br\>CO²: {2}
+                + <br\>Lichtsterkte: {3}
+                + <br\>Tijd van meting: {4}", data[3], data[4], data[5], data[6], data[7]);
+                */
+                Properties properties = new Properties
                 {
-                    result[x] = reader[x].ToString();
-                }                                                         
+                    description = desc,
+                    title = "Gemeten door " + data[2]
+                };
+                Geometry geometry = new Geometry
+                {
+                    type = "Point",
+                    coordinates = coords
+                };
+                Feature feature = new Feature
+                {
+                    type = "Feature",
+                    properties = properties,
+                    geometry = geometry
+                };
+                features.Add(feature);
             }
             connection.Close();
+
+            rootObject.features = features;
+            json = JsonConvert.SerializeObject(rootObject, Formatting.Indented);
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
-
-            return result;
+            return json;
         }
+        return json;
+    }
 
-        return result;
+    public class Geometry
+    {
+        public string type { get; set; }
+        public List<double> coordinates { get; set; }
+    }
+
+    public class Properties
+    {
+        public string title { get; set; }
+        public string description { get; set; }
+    }
+
+    public class Feature
+    {
+        public string type { get; set; }
+        public Geometry geometry { get; set; }
+        public Properties properties { get; set; }
+    }
+
+    public class RootObject
+    {
+        public string type = "FeatureCollection";
+        public List<Feature> features { get; set; }
     }
 }

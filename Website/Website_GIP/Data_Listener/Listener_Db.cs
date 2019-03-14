@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Data.OleDb;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
-public class Database
+public class Database_Listener
 {
     private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ..\Database.accdb; Persist Security Info = False;";
+    private readonly string connStringArthur = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Desktop\Database.mdb; Persist Security Info = False;";
+    private readonly string connStringRuben = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.accdb;Persist Security Info = False;";
 
     public void AddData(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string user)
     {
@@ -12,7 +14,7 @@ public class Database
 
         try
         {
-            connection.ConnectionString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.accdb;Persist Security Info = False;";
+            connection.ConnectionString = connStringArthur;
             connection.Open();
             OleDbCommand command = new OleDbCommand
             {
@@ -21,8 +23,6 @@ public class Database
             };
 
             command.ExecuteNonQuery();
-
-
         }
         catch (OleDbException error)
         {
@@ -31,6 +31,14 @@ public class Database
         finally
         {
             connection.Close();
+
+            // step 1: lees Json van User in
+
+            // step 2: voeg laatste meting aan Json toe
+
+            // step 3: save de Json file
+
+            // step 4: profit
         }
     }
 }
