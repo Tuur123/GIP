@@ -15,6 +15,7 @@ namespace Website_GIP
         Database db = new Database();
         public string markers;
         string serverPath = @"C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\";
+
         private string ComputeHash(string input)
         {
             SHA512 shaM = new SHA512Managed();
