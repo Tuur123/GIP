@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
         <div class="header">
             <asp:ImageButton ID="home" runat="server"
                 ImageUrl="logo_Luchtkwaliteit.png"
@@ -76,7 +76,7 @@
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
-                    <asp:Chart ID="ChartTemp" runat="server" DataSourceID="Db" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
+                    <asp:Chart ID="ChartTempHumi" runat="server" DataSourceID="Db" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
                         <Legends>
                             <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
                                 LegendStyle="Row" />
@@ -86,6 +86,19 @@
                             </asp:Series>
                             <asp:Series ChartType="Spline" Name="Vochtigheid" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="Vochtigheid">
                             </asp:Series>
+                        </Series>
+                        <ChartAreas>
+                            <asp:ChartArea Name="ChartArea1">
+                                <AxisX Interval="50"></AxisX>
+                            </asp:ChartArea>
+                        </ChartAreas>
+                    </asp:Chart>
+                    <asp:Chart ID="ChartCO2" runat="server" DataSourceID="Db" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
+                        <Legends>
+                            <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
+                                LegendStyle="Row" />
+                        </Legends>
+                        <Series>
                              <asp:Series ChartType="Spline" Name="CO2" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="CO2">
                             </asp:Series>
                         </Series>
@@ -95,10 +108,7 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringArthur %>" ProviderName="<%$ ConnectionStrings:ConnectionStringArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [Lichtsterkte], [CO2], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
-                        <SelectParameters>
-                            <asp:ControlParameter ControlID="TbUser" Name="Gebruiker" PropertyName="Text" Type="String" DefaultValue="ruben" />
-                        </SelectParameters>
+                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringRuben %>" ProviderName="<%$ ConnectionStrings:ConnectionStringRuben.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [CO2], [Temperatuur], [Lichtsterkte], [Tijd] FROM [Waardes]">
                     </asp:SqlDataSource>
                 </div>
             </div>
@@ -127,6 +137,12 @@
                     <script src="https://widget.aircheckr.com/js/client.widget.js"></script>
                 </div>
                 <div class="card">
+                    <h1>Gemeten DATA via van SD kaart:</h1>
+                    <input id="oFile" type="file" runat="server"  name="oFile"/>
+                    <asp:button id="btnUpload" type="submit" text="Upload" runat="server" OnClick="btnUpload_Click"></asp:button>
+                    <asp:Panel ID="frmConfirmation" Visible="False" Runat="server">
+                    <asp:Label id="lblUploadResult" Runat="server"></asp:Label>
+                    </asp:Panel>
                 </div>
             </div>
         </div>

@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Data.OleDb;
 using Newtonsoft.Json;
+using System.IO;
 
 public class Database
 {
     //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Desktop\Database.mdb; Persist Security Info = False;";
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb; Persist Security Info = False;";
+    private readonly string connStringArthur = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Desktop\Database.mdb; Persist Security Info = False;";
+    private readonly string connStringRuben = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    
 
     public void AddUser(string hash, string name)
     {
         string query = string.Format("INSERT INTO Users(Hash, Naam) VALUES('{0}', '{1}')", hash, name);
 
         OleDbConnection connection = new OleDbConnection();
-        connection.ConnectionString = connString;
+        connection.ConnectionString = connStringRuben;
         connection.Open();
 
         OleDbCommand command = new OleDbCommand
@@ -24,6 +27,51 @@ public class Database
         command.ExecuteNonQuery();
         connection.Close();
     }
+    public void ReadDataSD()
+    {
+        // Read DATALOG.txt
+        StreamReader DataFile = new StreamReader(@"C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\DATALOG.TXT");
+
+        string DataString = DataFile.ReadToEnd();
+        DataFile.Close();
+
+        string[] DataArray;
+
+        //split string from DATALOG.txt
+        DataArray = DataString.Split(new char[] { '&' });
+
+        for (int x = 0; x < DataArray.Length - 1; x++)
+        {
+            DataToDB(DataArray[x], DataArray[x + 1], DataArray[x + 2], DataArray[x + 3], DataArray[x + 4], DataArray[x + 5], DataArray[x + 6]);
+            x = x + 6;
+        }
+    }
+
+    public void DataToDB(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string user)
+    {
+        OleDbConnection connection = new OleDbConnection();
+
+        try
+        {
+            connection.ConnectionString = connStringRuben;
+            connection.Open();
+            OleDbCommand command = new OleDbCommand
+            {
+                Connection = connection,
+                CommandText = string.Format("INSERT INTO Waardes(Vochtigheid, Temperatuur, CO2, Lichtsterkte, Gebruiker, Tijd, Breedtegraad, lengtegraad) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');", vochtigheid, temperatuur, CO2, lichtsterkte, user, DateTime.Now.ToString(), breedtegraad, lengtegraad)
+            };
+
+            command.ExecuteNonQuery();
+        }
+        catch (OleDbException error)
+        {
+            Console.WriteLine(error.ToString());
+        }
+        finally
+        {
+            connection.Close();
+        }
+    }
 
     public string ValidateUser(string name)
     {
@@ -33,7 +81,7 @@ public class Database
         try
         {
             OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = connString;
+            connection.ConnectionString = connStringRuben;
             connection.Open();
 
             OleDbCommand command = new OleDbCommand
@@ -67,7 +115,7 @@ public class Database
         try
         {
             OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = connString;
+            connection.ConnectionString = connStringRuben;
             connection.Open();
 
             OleDbCommand command = new OleDbCommand

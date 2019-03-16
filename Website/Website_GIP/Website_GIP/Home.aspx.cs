@@ -16,6 +16,12 @@ namespace Website_GIP
         public string markers;
         //string serverPath = @"C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\";
         string serverPath = @"C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb";
+
+        protected System.Web.UI.WebControls.Button btnUpload;
+        protected System.Web.UI.WebControls.Label lblUploadResult;
+        protected System.Web.UI.WebControls.Panel frmConfirmation;
+        protected System.Web.UI.HtmlControls.HtmlInputFile oFile;
+
         private string ComputeHash(string input)
         {
             SHA512 shaM = new SHA512Managed();
@@ -65,6 +71,42 @@ namespace Website_GIP
         protected void ImageButton_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("Home.aspx");
+        }
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            string strFileName;
+            string strFilePath;
+            string strFolder;
+            strFolder = Server.MapPath("./");
+
+            // Retrieve the name of the file that is posted.
+
+            strFileName = oFile.PostedFile.FileName;
+            strFileName = Path.GetFileName(strFileName);
+            if (oFile.Value != "")
+            {
+                // Create the folder if it does not exist.
+                if (!Directory.Exists(strFolder))
+                {
+                    Directory.CreateDirectory(strFolder);
+                }
+
+                // Save the uploaded file to the server.
+                strFilePath = strFolder + strFileName;
+
+                oFile.PostedFile.SaveAs(strFilePath);
+                lblUploadResult.Text = strFileName + " has been successfully uploaded.";
+
+                // Slaag file op in Database
+                db.ReadDataSD();
+            }
+            else
+            {
+                lblUploadResult.Text = "Click 'Browse' to select the file to upload.";
+            }
+            // Display the result of the upload.
+            frmConfirmation.Visible = true;
         }
     }
 }
