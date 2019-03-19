@@ -13,11 +13,12 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="map.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 
-<body>
+<body onload="drawMap(document.getElementById('<%= TbUser.ClientID %>').value)">
     <form id="form1" runat="server" enctype="multipart/form-data">
         <div class="header">
             <asp:ImageButton ID="home" runat="server"
@@ -30,53 +31,11 @@
             <div class="leftcolumn">
                 <div class="card">
                     <div id='map'></div>
-                    <script src="map.js"></script>
-                    <!--<script>mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
-
-                        var geojson = {
-                        type: 'FeatureCollection',
-                            features: [
-                                {
-                                    type: 'Feature',
-                                    geometry: {
-                                        type: 'Point',
-                                        coordinates: [
-                                            4.474796, 51.392509
-                                        ]
-                                    },
-                                    properties: {
-                                        title: 'Gemeten door Ruben',
-                                        description: 'Please werk aub'
-                                    }
-                                }]
-                            };
-
-                        var map = new mapboxgl.Map({
-                            container: 'map',
-                            style: 'mapbox://styles/mapbox/streets-v9',
-                            center: [4.471421, 51.386688],
-                            zoom: 10
-                        });
-
-                        
-                        // haalt de markers uit de JSON file, elke 'feature' is een marker
-                        geojson.features.forEach(function (marker) {
-                            // HTML element maken voor elke feature
-                            var el = document.createElement('div');
-                            el.className = 'marker';
-
-                            // voor elke feature een marker maken en op de map tonen
-                            new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).setPopup(new mapboxgl.Popup({ offset: 25 })
-                                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>')).addTo(map);
-                        });
-
-                        //control voor navigatie
-                        map.addControl(new mapboxgl.NavigationControl());
-                    </script>-->
+                    
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
-                    <asp:Chart ID="ChartTempHumi" runat="server" DataSourceID="Db" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
+                    <asp:Chart ID="ChartTempHumi" runat="server" DataSourceID="DbCharts" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
                         <Legends>
                             <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
                                 LegendStyle="Row" />
@@ -93,7 +52,7 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:Chart ID="ChartCO2" runat="server" DataSourceID="Db" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
+                    <asp:Chart ID="ChartCO2" runat="server" DataSourceID="DbCharts" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
                         <Legends>
                             <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
                                 LegendStyle="Row" />
@@ -108,7 +67,10 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringArthur %>" ProviderName="<%$ ConnectionStrings:ConnectionStringArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [CO2], [Temperatuur], [Lichtsterkte], [Tijd] FROM [Waardes]">
+                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:connectionStringArthur %>" ProviderName="<%$ ConnectionStrings:connectionStringArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [CO2], [Temperatuur], [Lichtsterkte], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="TbUser" DefaultValue="ruben" Name="Gebruiker" PropertyName="Text" Type="String" />
+                        </SelectParameters>
                     </asp:SqlDataSource>
                 </div>
             </div>

@@ -31,6 +31,33 @@ namespace Website_GIP {
         protected global::System.Web.UI.WebControls.ImageButton home;
         
         /// <summary>
+        /// ChartTempHumi control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart ChartTempHumi;
+        
+        /// <summary>
+        /// ChartCO2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.DataVisualization.Charting.Chart ChartCO2;
+        
+        /// <summary>
+        /// DbCharts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource DbCharts;
+        
+        /// <summary>
         /// TbUser control.
         /// </summary>
         /// <remarks>
