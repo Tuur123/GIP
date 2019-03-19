@@ -16,7 +16,7 @@ public class Database
         string query = string.Format("INSERT INTO Users(Hash, Naam) VALUES('{0}', '{1}')", hash, name);
 
         OleDbConnection connection = new OleDbConnection();
-        connection.ConnectionString = connStringRuben;
+        connection.ConnectionString = connStringArthur;
         connection.Open();
 
         OleDbCommand command = new OleDbCommand
@@ -29,6 +29,7 @@ public class Database
     }
     public void ReadDataSD()
     {
+        //ge moet hier nog wel checks inzette zoda user gene bullshit in de db kunne zette
         // Read DATALOG.txt
         StreamReader DataFile = new StreamReader(@"C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\DATALOG.TXT");
 
@@ -143,15 +144,13 @@ public class Database
 
                 coords.Add(Convert.ToDouble(data[0]));
                 coords.Add(Convert.ToDouble(data[1]));
-
-                desc = "Please werk aub";
-                /*
+                
                 desc = string.Format(@"Temperatuur: {1}
                 + <br\>Vochtigheid: {0}
                 + <br\>CO²: {2}
                 + <br\>Lichtsterkte: {3}
                 + <br\>Tijd van meting: {4}", data[3], data[4], data[5], data[6], data[7]);
-                */
+                
                 Properties properties = new Properties
                 {
                     description = desc,

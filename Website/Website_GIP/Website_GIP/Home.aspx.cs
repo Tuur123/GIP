@@ -17,9 +17,9 @@ namespace Website_GIP
         //string serverPath = @"C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\";
         string serverPath = @"C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb";
 
-        protected System.Web.UI.WebControls.Button btnUpload;
-        protected System.Web.UI.WebControls.Label lblUploadResult;
-        protected System.Web.UI.WebControls.Panel frmConfirmation;
+        protected Button btnUpload;
+        protected Label lblUploadResult;
+        protected Panel frmConfirmation;
         protected System.Web.UI.HtmlControls.HtmlInputFile oFile;
 
         private string ComputeHash(string input)
