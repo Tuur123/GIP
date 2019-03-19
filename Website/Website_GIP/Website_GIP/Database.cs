@@ -6,17 +6,15 @@ using System.IO;
 
 public class Database
 {
-    //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Desktop\Database.mdb; Persist Security Info = False;";
-    private readonly string connStringArthur = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Desktop\Database.mdb; Persist Security Info = False;";
-    private readonly string connStringRuben = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
     
-
     public void AddUser(string hash, string name)
     {
         string query = string.Format("INSERT INTO Users(Hash, Naam) VALUES('{0}', '{1}')", hash, name);
 
         OleDbConnection connection = new OleDbConnection();
-        connection.ConnectionString = connStringArthur;
+        connection.ConnectionString = connString;
         connection.Open();
 
         OleDbCommand command = new OleDbCommand
@@ -27,6 +25,7 @@ public class Database
         command.ExecuteNonQuery();
         connection.Close();
     }
+
     public void ReadDataSD()
     {
         //ge moet hier nog wel checks inzette zoda user gene bullshit in de db kunne zette
@@ -54,7 +53,7 @@ public class Database
 
         try
         {
-            connection.ConnectionString = connStringArthur;
+            connection.ConnectionString = connString;
             connection.Open();
             OleDbCommand command = new OleDbCommand
             {
@@ -82,7 +81,7 @@ public class Database
         try
         {
             OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = connStringArthur;
+            connection.ConnectionString = connString;
             connection.Open();
 
             OleDbCommand command = new OleDbCommand
@@ -116,7 +115,7 @@ public class Database
         try
         {
             OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = connStringArthur;
+            connection.ConnectionString = connString;
             connection.Open();
 
             OleDbCommand command = new OleDbCommand
