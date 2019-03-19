@@ -54,7 +54,7 @@ public class Database
 
         try
         {
-            connection.ConnectionString = connStringRuben;
+            connection.ConnectionString = connStringArthur;
             connection.Open();
             OleDbCommand command = new OleDbCommand
             {
@@ -82,7 +82,7 @@ public class Database
         try
         {
             OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = connStringRuben;
+            connection.ConnectionString = connStringArthur;
             connection.Open();
 
             OleDbCommand command = new OleDbCommand
@@ -116,7 +116,7 @@ public class Database
         try
         {
             OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = connStringRuben;
+            connection.ConnectionString = connStringArthur;
             connection.Open();
 
             OleDbCommand command = new OleDbCommand

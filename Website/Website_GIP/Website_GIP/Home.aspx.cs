@@ -10,12 +10,12 @@ using System.Security.Cryptography;
 
 namespace Website_GIP
 {
-    public partial class Home : System.Web.UI.Page
+    public partial class Home : Page
     {
         Database db = new Database();
         public string markers;
-        //string serverPath = @"C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\";
-        string serverPath = @"C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb";
+        string serverPath = @"C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\";
+        //string serverPath = @"C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb";
 
         protected Button btnUpload;
         protected Label lblUploadResult;
@@ -47,9 +47,6 @@ namespace Website_GIP
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;
                 LblUser.Text = TbUser.Text;
-                markers = db.GetUserData(TbUser.Text);
-                StreamWriter writer = new StreamWriter(serverPath + TbUser.Text);
-                writer.Write(markers);
             }
             else
             {

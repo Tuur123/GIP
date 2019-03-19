@@ -12,6 +12,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
@@ -29,9 +30,8 @@
             <div class="leftcolumn">
                 <div class="card">
                     <div id='map'></div>
-                    <!--<script src="map.js"></script>-->
-                    <script src="jquery.js"></script>
-                    <script>mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
+                    <script src="map.js"></script>
+                    <!--<script>mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
 
                         var geojson = {
                         type: 'FeatureCollection',
@@ -72,7 +72,7 @@
 
                         //control voor navigatie
                         map.addControl(new mapboxgl.NavigationControl());
-                    </script>
+                    </script>-->
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
