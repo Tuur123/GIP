@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Text;
 using System.IO;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 using System.Security.Cryptography;
 
 namespace Website_GIP
@@ -20,7 +21,7 @@ namespace Website_GIP
         protected Button btnUpload;
         protected Label lblUploadResult;
         protected Panel frmConfirmation;
-        protected System.Web.UI.HtmlControls.HtmlInputFile oFile;
+        protected HtmlInputFile oFile;
 
         private string ComputeHash(string input)
         {
@@ -73,30 +74,17 @@ namespace Website_GIP
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             string strFileName;
-            string strFilePath;
-            string strFolder;
-            strFolder = Server.MapPath("./");
 
             // Retrieve the name of the file that is posted.
-
             strFileName = oFile.PostedFile.FileName;
-            strFileName = Path.GetFileName(strFileName);
+
             if (oFile.Value != "")
             {
-                // Create the folder if it does not exist.
-                if (!Directory.Exists(strFolder))
+                using (StreamReader inputStreamReader = new StreamReader(oFile.PostedFile.InputStream))
                 {
-                    Directory.CreateDirectory(strFolder);
+                    db.AddSD(inputStreamReader.ReadToEnd());
                 }
-
-                // Save the uploaded file to the server.
-                strFilePath = strFolder + strFileName;
-
-                oFile.PostedFile.SaveAs(strFilePath);
-                lblUploadResult.Text = strFileName + " has been successfully uploaded.";
-
-                // Slaag file op in Database
-                db.ReadDataSD();
+                lblUploadResult.Text = strFileName + " has been successfully uploaded.";             
             }
             else
             {

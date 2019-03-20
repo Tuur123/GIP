@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.OleDb;
-//using Newtonsoft.Json;
 
 public class Database_Listener
 {
@@ -31,14 +30,6 @@ public class Database_Listener
         finally
         {
             connection.Close();
-
-            // step 1: lees Json van User in
-
-            // step 2: voeg laatste meting aan Json toe
-
-            // step 3: save de Json file
-
-            // step 4: profit
         }
     }
 }

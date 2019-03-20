@@ -30,8 +30,7 @@
         <div class="row">
             <div class="leftcolumn">
                 <div class="card">
-                    <div id='map'></div>
-                    
+                    <div id='map'></div>                
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
