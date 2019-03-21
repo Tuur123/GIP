@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace WebSiteApi
+namespace Api
 {
     public static class WebApiConfig
     {
@@ -15,9 +15,9 @@ namespace WebSiteApi
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-            name: "defaultApi",
-            routeTemplate: "api/{controller}/{action}/{id}",
-            defaults: new { controller = "GeoJsonController", id = RouteParameter.Optional }
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
         }
     }

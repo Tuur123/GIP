@@ -5,15 +5,17 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Website_GIP.Controllers
+namespace Api.Controllers
 {
-    public class GeoJsonController : ApiController
+    public class JsonController : ApiController
     {
-        Database Db = new Database();
+        readonly Database Db = new Database();
 
-        [HttpGet]
+        [Route("api/geoJson/")]
+        [HttpGet()]
         public IHttpActionResult GetJson(string id)
         {
+
             return Ok(Db.GetUserData(id));
         }
     }

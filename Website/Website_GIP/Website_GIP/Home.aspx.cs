@@ -14,9 +14,7 @@ namespace Website_GIP
     public partial class Home : Page
     {
         Database db = new Database();
-        public string markers;
-        //string serverPath = @"C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\";
-        //string serverPath = @"C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb";
+        public string markers, userId;
 
         protected Button btnUpload;
         protected Label lblUploadResult;
@@ -48,6 +46,7 @@ namespace Website_GIP
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;
                 LblUser.Text = TbUser.Text;
+                userId = ComputeHash(TbUser.Text + TbPassword.Text); // met de userId kan de gebruiker zich authenticeren op de API
             }
             else
             {
