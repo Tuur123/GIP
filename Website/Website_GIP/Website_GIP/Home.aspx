@@ -66,10 +66,7 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:connectionStringArthur %>" ProviderName="<%$ ConnectionStrings:connectionStringArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [CO2], [Temperatuur], [Lichtsterkte], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
-                        <SelectParameters>
-                            <asp:ControlParameter ControlID="TbUser" DefaultValue="ruben" Name="Gebruiker" PropertyName="Text" Type="String" />
-                        </SelectParameters>
+                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringRuben %>" ProviderName="<%$ ConnectionStrings:ConnectionStringRuben.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Tijd], [Lichtsterkte] FROM [Waardes]">
                     </asp:SqlDataSource>
                 </div>
             </div>
@@ -98,7 +95,7 @@
                     <script src="https://widget.aircheckr.com/js/client.widget.js"></script>
                 </div>
                 <div class="card">
-                    <h1>Gemeten DATA via van SD kaart:</h1>
+                    <h1>Metingen uploaden van een SD kaart:</h1>
                     <input id="oFile" type="file" runat="server"  name="oFile"/>
                     <asp:button id="btnUpload" type="submit" text="Upload" runat="server" OnClick="btnUpload_Click"></asp:button>
                     <asp:Panel ID="frmConfirmation" Visible="False" Runat="server">
@@ -107,10 +104,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <h2>Footer</h2>
-            <asp:Button ID="BtnOverons" runat="server" Text="Over ons" Width="75%" OnClick="BtnOverons_Click" />
-        </div>
+        
     </form>
 </body>
 </html>
