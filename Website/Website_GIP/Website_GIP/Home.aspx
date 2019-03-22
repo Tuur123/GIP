@@ -18,8 +18,10 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 
-<body onload="drawMap(document.getElementById('<%= TbUser.ClientID %>').value)">
+<body>
     <form id="form1" runat="server" enctype="multipart/form-data">
+        <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true">
+</asp:ScriptManager>
         <div class="header">
             <asp:ImageButton ID="home" runat="server"
                 ImageUrl="logo_Luchtkwaliteit.png"
@@ -66,7 +68,10 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStringRuben %>" ProviderName="<%$ ConnectionStrings:ConnectionStringRuben.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Tijd], [Lichtsterkte] FROM [Waardes]">
+                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:connectionStringArthur %>" ProviderName="<%$ ConnectionStrings:connectionStringArthur.ProviderName %>" SelectCommand="SELECT DISTINCT [Vochtigheid], [Temperatuur], [CO2], [Tijd], [Lichtsterkte] FROM [Waardes] WHERE ([Gebruiker] = ?)">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="TbUser" DefaultValue="ruben" Name="Gebruiker" PropertyName="Text" Type="String" />
+                        </SelectParameters>
                     </asp:SqlDataSource>
                 </div>
             </div>

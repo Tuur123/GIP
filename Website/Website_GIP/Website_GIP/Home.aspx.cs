@@ -15,7 +15,7 @@ namespace Website_GIP
     public partial class Home : Page
     {
         Database db = new Database();
-        public string markers, userId;
+        public string markers, userId = null;
 
         protected Button btnUpload;
         protected Label lblUploadResult;
@@ -38,16 +38,17 @@ namespace Website_GIP
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
             string[] loginMessage = { "Verkeerde wachtwoord of gebruikersnaam!", "U bent al ingelogd!" };
+            // met de userId kan de gebruiker zich authenticeren;
 
+            userId = ComputeHash(TbUser.Text + TbPassword.Text);
             if (Convert.ToBoolean(ViewState["Login"]))
                 Response.Write("<script>alert('" + loginMessage[1] + "')</script>");
 
-            else if (ComputeHash(TbUser.Text + TbPassword.Text) == db.ValidateUser(TbUser.Text))
+            else if (userId == db.ValidateUser(TbUser.Text))
             {
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;
-                LblUser.Text = TbUser.Text;
-                userId = ComputeHash(TbUser.Text + TbPassword.Text); // met de userId kan de gebruiker zich authenticeren op de API
+                LblUser.Text = TbUser.Text;             
             }
             else
             {
@@ -95,9 +96,13 @@ namespace Website_GIP
         }
 
         [WebMethod]
-        public string GetDataFromDB(string user)
+        public string GetDataFromDB()
         {
-            return db.GetUserData(user);
+            if (db.ValidateUser(TbUser.Text) == userId)
+                return db.GetUserData(TbUser.Text);
+            Response.StatusCode = 401;
+            Response.End();
+            return null;
         }
     }
 }

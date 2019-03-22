@@ -1,4 +1,5 @@
-﻿function drawMap(user) {
+﻿$(document).ready(function () {
+
     mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
 
     var json;
@@ -10,21 +11,14 @@
         zoom: 13
     });
 
-    var query = `Home.aspx/GetJson(${user})`;
-    console.log(user);
-    $.ajax
-        ({
-            type: "GET",
-            url: query,
-            dataType: 'application/json',
+    PageMethods.GetDataFromDB(OnSuccess);
 
-            complete: function (data) {
-                console.log(data.status);
-                var data_parsed = JSON.parse(data.responseText);
-                json = data_parsed;
-                console.log(data_parsed);
-            }
-        });
+    function OnSuccess(response) {
+        console.log(response);
+        var data_parsed = JSON.parse(data.responseText);
+        console.log(data_parsed);
+        json = data_parsed;
+    }
 
     // add markers to map
     json.features.forEach(function (marker) {
@@ -41,4 +35,4 @@
     });
 
     map.addControl(new mapboxgl.NavigationControl());
-}
+});
