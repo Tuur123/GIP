@@ -10,8 +10,7 @@
         zoom: 13
     });
 
-
-    var query = `/api/GeoJsonController/` + user;
+    var query = `Home.aspx/GetJson(${user})`;
     console.log(user);
     $.ajax
         ({

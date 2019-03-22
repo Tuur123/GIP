@@ -8,6 +8,7 @@ using System.IO;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Security.Cryptography;
+using System.Web.Services;
 
 namespace Website_GIP
 {
@@ -91,6 +92,12 @@ namespace Website_GIP
             }
             // Display the result of the upload.
             frmConfirmation.Visible = true;
+        }
+
+        [WebMethod]
+        public string GetDataFromDB(string user)
+        {
+            return db.GetUserData(user);
         }
     }
 }
