@@ -1,6 +1,6 @@
 #include "dht.h"
 #define dht_dpin 6 // Analog Pin sensor is connected to
-//#include <BH1750FVI.h>                                 // Voegt de bibliotheek van de sensor toe
+#include <BH1750FVI.h>                                 // Voegt de bibliotheek van de sensor toe
 #include <Wire.h>
 #include <SparkFunCCS811.h>
 #define CCS811_ADDR 0x5B //standaard I²C adres
@@ -15,11 +15,12 @@ TinyGPS gps;                               // Maakt een object aan genaamd "gps"
 SoftwareSerial ss(4, 3);          // Declareert poort 4 als TX pin en poort 3 als RX pin
 
 CCS811 ccs(CCS811_ADDR); //ccs object aanmaken met standaard I²C adres
-//BH1750FVI LichtSensor(BH1750FVI::k_DevModeContLowRes); // Maakt het object LichtSensor aan
+
+
+BH1750FVI LichtSensor(BH1750FVI::k_DevModeContLowRes); // Maakt het object LichtSensor aan
+
  
 dht DHT;
-
-
 
 String temperatuur;
 String vochtigheid;
@@ -35,7 +36,7 @@ void setup(){
   Serial.begin(9600);
   myGsm.begin(9600);                               // Verbinding met SIM900 instellen op 9600 Baud
   ss.begin(9600);
-  //LichtSensor.begin();
+  LichtSensor.begin();
   Wire.begin(); //start I²C bus
   CCS811Core::status returnCode = ccs.begin();
   delay(500);//Delay to let system boot
@@ -77,7 +78,7 @@ void loop()
 {
   smartdelay(4000);
   getcoordinates();
-  //BH1750();
+  BH1750();
   CCS_811();
   DHT11();
   printData();
@@ -91,10 +92,10 @@ void DHT11()
     temperatuur = DHT.temperature;
     vochtigheid = DHT.humidity;
 }
-/*void BH1750()
+void BH1750()
 {
   lichtsterkte = LichtSensor.GetLightIntensity();    // Leest de resulaten van de sensor in
-}*/
+}
 void CCS_811()
 {
     //kijken of er data beschikbaar is
