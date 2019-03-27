@@ -36,7 +36,7 @@ const int chipSelect = 10; // Pin 10 ceclareren als CS pin van SD reader
   unsigned long date, time, chars;
   int year;
   byte month, day, hour, minute, second, hundredths;
-
+String tijd;
   
 void setup(){
   pinMode(5,INPUT);
@@ -89,7 +89,9 @@ void loop()
   smartdelay(4000);
   getcoordinates();
   GetDateTime();
-  BH1750();
+  delay(2000);
+  BH1750_();
+  delay(2000);
   CCS_811();
   DHT11();
   printData();
@@ -106,8 +108,7 @@ void loop()
     digitalWrite(2,LOW);
     digitalWrite(9, HIGH);
   }
-  
-  
+  delay(2000);  
 }
 void DHT11()
 {
@@ -116,12 +117,17 @@ void DHT11()
     temperatuur = DHT.temperature;
     vochtigheid = DHT.humidity;
 }
-void BH1750()
+void BH1750_()
 {
   lichtsterkte = LichtSensor.GetLightIntensity();    // Leest de resulaten van de sensor in
 }
 void CCS_811()
 {
+      //Laat sensor CO2 waardes en tVOC waardes berekenen
+    ccs.readAlgorithmResults();
+    
+    //vraag CO2 waarde
+    CO2 = ccs.getCO2();
     //kijken of er data beschikbaar is
   if (ccs.dataAvailable())
   {  
@@ -150,14 +156,7 @@ void smartdelay(unsigned long ms)
 void GetDateTime()
 {
     gps.get_datetime(&date, &time, &age);
-
-  gps.crack_datetime(&year, &month, &day, &hour, &minute, &second, &hundredths, &age);
-  Serial.print("Date: "); Serial.print(static_cast<int>(month)); Serial.print("/"); 
-    Serial.print(static_cast<int>(day)); Serial.print("/"); Serial.print(year);
-  Serial.print("  Time: "); Serial.print(static_cast<int>(hour+1));  Serial.print(":"); //Serial.print("UTC +08:00 Malaysia");
-    Serial.print(static_cast<int>(minute)); Serial.print(":"); Serial.print(static_cast<int>(second));
-    Serial.print("."); Serial.print(static_cast<int>(hundredths)); Serial.print(" UTC +01:00 Brussel");
-  Serial.print("  Fix age: ");  Serial.print(age); Serial.println("ms.");
+  //gps.crack_datetime(&year, &month, &day, &hour, &minute, &second, &hundredths, &age); 
 }
 void senddata()
 {
@@ -173,8 +172,7 @@ void senddata()
   delay(1000);                                     // Wacht 1 seconde
   printSerialData();                               // Ga naar de "printSerialData" methode
 
-
-  myGsm.println("AT+CSTT=\"mworld.be\",\"\",\"\"");// acces point name instellen om toegang te krijgen tot het moebiele netwerk van de provider
+  myGsm.println("AT+CSTT=\"mworld.be\",\"\",\"\"");// acces point name instellen om toegang te krijgen tot het mobiele netwerk van de provider
   delay(5000);                                     // wacht 5 seconden om dinstelling door te voeren naar de SIM900
   printSerialData();                               // ga naar de "printSerialData" methode
 
@@ -224,6 +222,10 @@ void sendData()
     myGsm.print("&");
     myGsm.print(flon, 6); 
     myGsm.print("&");
+    myGsm.print(date);
+    myGsm.print(" ");
+    myGsm.print(time);
+    myGsm.print("&");
     myGsm.println("Ruben$");
     
     myGsm.write(0x1A);
@@ -241,7 +243,7 @@ void printData()
     Serial.print(vochtigheid); 
     Serial.println("%");
   //print lichtsterkte 
-    Serial.print("Lichtsterkte: ");
+    Serial.print("Lichtsterkte= ");
     Serial.println(lichtsterkte);
   //print CO² waarde
     Serial.print("CO² waarde = ");
@@ -252,6 +254,9 @@ void printData()
   //print lengtegraad
     Serial.print("lengtegraad = ");
     Serial.println(flon,6);
+    Serial.print(date);
+    Serial.print(" ");
+    Serial.println(time);
 }
 
 void DataToSD()
@@ -273,6 +278,10 @@ void DataToSD()
       dataFile.print("&");
       dataFile.print(flon, 6); 
       dataFile.print("&");
+      dataFile.print(date);
+      dataFile.print(" ");
+      dataFile.print(time);
+      dataFile.print("&");
       dataFile.print("Ruben&");
       dataFile.close();
     }
@@ -280,5 +289,13 @@ void DataToSD()
     else {
       Serial.println("error opening datalog.txt");
     }
+  }
+  else
+  {
+      digitalWrite(2, HIGH);
+      digitalWrite(9, HIGH);
+      delay(500);
+      digitalWrite(2,LOW);
+      digitalWrite(9, LOW);
   }
 }
