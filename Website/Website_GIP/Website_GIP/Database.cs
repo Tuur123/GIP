@@ -135,19 +135,15 @@ public class Database
                 data[0] = data[0].Replace('.', ',');
                 data[1] = data[1].Replace('.', ',');
 
-                coords.Add(Convert.ToDouble(data[0]));
                 coords.Add(Convert.ToDouble(data[1]));
+                coords.Add(Convert.ToDouble(data[0]));
                 
-                desc = string.Format(@"Temperatuur: {1}
-                + <br\>Vochtigheid: {0}
-                + <br\>CO²: {2}
-                + <br\>Lichtsterkte: {3}
-                + <br\>Tijd van meting: {4}", data[3], data[4], data[5], data[6], data[7]);
+                desc = string.Format(@"Temperatuur: {1} <br/>Vochtigheid: {0} <br/>CO²: {2} <br/>Lichtsterkte: {3} <br/>Tijd van meting: {4}", data[3], data[4], data[5], data[6], data[7]);
                 
                 Properties properties = new Properties
                 {
                     description = desc,
-                    title = "Gemeten door " + data[2]
+                    title = "Gemeten door: " + data[2]
                 };
                 Geometry geometry = new Geometry
                 {
@@ -165,6 +161,7 @@ public class Database
             connection.Close();
 
             rootObject.features = features;
+            
             json = JsonConvert.SerializeObject(rootObject, Formatting.Indented);
         }
         catch (Exception e)

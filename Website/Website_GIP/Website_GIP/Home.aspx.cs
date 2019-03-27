@@ -15,7 +15,7 @@ namespace Website_GIP
     public partial class Home : Page
     {
         Database db = new Database();
-        public string markers, userId = null;
+        public static string markers, userName, userId = null;
 
         protected Button btnUpload;
         protected Label lblUploadResult;
@@ -48,7 +48,8 @@ namespace Website_GIP
             {
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;
-                LblUser.Text = TbUser.Text;             
+                LblUser.Text = TbUser.Text;
+                userName = TbUser.Text;
             }
             else
             {
@@ -96,12 +97,14 @@ namespace Website_GIP
         }
 
         [WebMethod]
-        public string GetDataFromDB()
+        public static string GetDataFromDB()
         {
-            if (db.ValidateUser(TbUser.Text) == userId)
-                return db.GetUserData(TbUser.Text);
-            Response.StatusCode = 401;
-            Response.End();
+            Database db = new Database();
+
+            if (db.ValidateUser(userName) == userId)
+                return db.GetUserData(userName);
+            //Response.StatusCode = 401;
+            //Response.End();
             return null;
         }
     }
