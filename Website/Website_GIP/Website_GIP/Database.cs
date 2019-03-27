@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 
 public class Database
 {
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
-    //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
     
     public void AddUser(string hash, string name)
     {
@@ -36,12 +36,21 @@ public class Database
 
         for (int x = 0; x < DataArray.Length - 1; x++)
         {
-            DataToDB(DataArray[x], DataArray[x + 1], DataArray[x + 2], DataArray[x + 3], DataArray[x + 4], DataArray[x + 5], DataArray[x + 6]);
-            x = x + 6;
+            if (DataArray[x + 6].Length >= 12)
+            {
+                DataArray[x + 6] = DataArray[x + 6].Insert(2, "-");
+                DataArray[x + 6] = DataArray[x + 6].Insert(5, "-");
+                DataArray[x + 6] = DataArray[x + 6].Insert(11, ":");
+                DataArray[x + 6] = DataArray[x + 6].Insert(14, ":");
+                DataArray[x + 6] = DataArray[x + 6].Insert(17, ":");
+            }
+
+            DataToDB(DataArray[x], DataArray[x + 1], DataArray[x + 2], DataArray[x + 3], DataArray[x + 4], DataArray[x + 5], DataArray[x + 6], DataArray[x + 7]);
+            x = x + 7;
         }
     }
 
-    public void DataToDB(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string user)
+    public void DataToDB(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string time, string user)
     {
         OleDbConnection connection = new OleDbConnection();
 
@@ -52,7 +61,7 @@ public class Database
             OleDbCommand command = new OleDbCommand
             {
                 Connection = connection,
-                CommandText = string.Format("INSERT INTO Waardes(Vochtigheid, Temperatuur, CO2, Lichtsterkte, Gebruiker, Tijd, Breedtegraad, lengtegraad) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');", vochtigheid, temperatuur, CO2, lichtsterkte, user, DateTime.Now.ToString(), breedtegraad, lengtegraad)
+                CommandText = string.Format("INSERT INTO Waardes(Vochtigheid, Temperatuur, CO2, Lichtsterkte, Gebruiker, Tijd, Breedtegraad, lengtegraad) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');", vochtigheid, temperatuur, CO2, lichtsterkte, user, time, breedtegraad, lengtegraad)
             };
 
             command.ExecuteNonQuery();

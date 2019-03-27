@@ -38,6 +38,7 @@ namespace Data_Listener
                     netwerkStream.Read(bytesIn, 0, (int)clientSocket.ReceiveBufferSize);
 
                     string clientData = System.Text.Encoding.ASCII.GetString(bytesIn);
+                    clientData = clientData.TrimStart('@');
                     clientData = clientData.Substring(0, clientData.IndexOf("$"));
                     string[] data = clientData.Split(new char[] { '&' });
 
@@ -48,14 +49,27 @@ namespace Data_Listener
                     string CO2 = data[3];
                     string breedtegraad = data[4];
                     string lengtegraad = data[5];
-                    string user = data[6];
+
+                    if (data[6].Length >= 12)
+                    {
+                        data[6] = data[6].Insert(2, "-");
+                        data[6] = data[6].Insert(5, "-");
+                        data[6] = data[6].Insert(11, ":");
+                        data[6] = data[6].Insert(14, ":");
+                        data[6] = data[6].Insert(17, ":");
+                    }
+
+                    string time = data[6];
+                    string user = data[7];
+
+                    db.AddData(vochtigheid, temperatuur, lichtsterkte, CO2, breedtegraad, lengtegraad, time, user);
 
                     netwerkStream.Flush();
+
 
                     //Console.WriteLine(" >> ");
                     clientSocket.Close();
                     serverSocket.Stop();
-                    db.AddData(vochtigheid, temperatuur, lichtsterkte, CO2, breedtegraad, lengtegraad, user);
                 }
                 catch (NotSupportedException error)
                 {

@@ -98,13 +98,13 @@ void loop()
   
   if (digitalRead(5) == 1)
   {
-    DataToSD();
+    //DataToSD();
     digitalWrite(9,LOW);
     digitalWrite(2, HIGH); 
   }
   else if (digitalRead(5) == 0)
   {
-    //senddata();
+    senddata();
     digitalWrite(2,LOW);
     digitalWrite(9, HIGH);
   }
@@ -210,6 +210,7 @@ void printSerialData()
 
 void sendData()
 {
+    myGsm.print("@");
     myGsm.print(vochtigheid);
     myGsm.print("&");
     myGsm.print(temperatuur); 
