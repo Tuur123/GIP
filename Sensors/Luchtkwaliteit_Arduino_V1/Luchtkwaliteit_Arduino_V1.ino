@@ -31,7 +31,17 @@ void print_float(float val, float invalid, int len, int prec);
 float flat, flon;
 unsigned long age;
 const int chipSelect = 10; // Pin 10 ceclareren als CS pin van SD reader 
+
+  long lat, lon;
+  unsigned long date, time, chars;
+  int year;
+  byte month, day, hour, minute, second, hundredths;
+
+  
 void setup(){
+  pinMode(5,INPUT);
+  pinMode(2, OUTPUT);
+  pinMode(9, OUTPUT);
  
   Serial.begin(9600);
   myGsm.begin(9600);                               // Verbinding met SIM900 instellen op 9600 Baud
@@ -78,12 +88,26 @@ void loop()
 {
   smartdelay(4000);
   getcoordinates();
+  GetDateTime();
   BH1750();
   CCS_811();
   DHT11();
   printData();
-  //senddata();
-  DataToSD();
+  
+  if (digitalRead(5) == 1)
+  {
+    DataToSD();
+    digitalWrite(9,LOW);
+    digitalWrite(2, HIGH); 
+  }
+  else if (digitalRead(5) == 0)
+  {
+    //senddata();
+    digitalWrite(2,LOW);
+    digitalWrite(9, HIGH);
+  }
+  
+  
 }
 void DHT11()
 {
@@ -122,6 +146,18 @@ void smartdelay(unsigned long ms)
     while (ss.available())
       gps.encode(ss.read());
   } while (millis() - start < ms);
+}
+void GetDateTime()
+{
+    gps.get_datetime(&date, &time, &age);
+
+  gps.crack_datetime(&year, &month, &day, &hour, &minute, &second, &hundredths, &age);
+  Serial.print("Date: "); Serial.print(static_cast<int>(month)); Serial.print("/"); 
+    Serial.print(static_cast<int>(day)); Serial.print("/"); Serial.print(year);
+  Serial.print("  Time: "); Serial.print(static_cast<int>(hour+1));  Serial.print(":"); //Serial.print("UTC +08:00 Malaysia");
+    Serial.print(static_cast<int>(minute)); Serial.print(":"); Serial.print(static_cast<int>(second));
+    Serial.print("."); Serial.print(static_cast<int>(hundredths)); Serial.print(" UTC +01:00 Brussel");
+  Serial.print("  Fix age: ");  Serial.print(age); Serial.println("ms.");
 }
 void senddata()
 {
