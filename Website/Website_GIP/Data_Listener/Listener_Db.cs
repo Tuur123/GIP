@@ -3,8 +3,7 @@ using System.Data.OleDb;
 
 public class Database_Listener
 {
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = ..\Database.accdb; Persist Security Info = False;";
-    private readonly string connStringArthur = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Desktop\Database.mdb; Persist Security Info = False;";
+    private readonly string connStringArthur = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\Gip\Website\Website_GIP\Website_GIP\Database.mdb; Persist Security Info = False;";
     private readonly string connStringRuben = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
 
     public void AddData(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string time, string user)
@@ -13,7 +12,7 @@ public class Database_Listener
 
         try
         {
-            connection.ConnectionString = connStringRuben;
+            connection.ConnectionString = connStringArthur;
             connection.Open();
             OleDbCommand command = new OleDbCommand
             {
