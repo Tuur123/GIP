@@ -76,12 +76,11 @@ void setup(){
     }
     while (1);
   }
-    if (!SD.begin(chipSelect)) {
+     if (!SD.begin(chipSelect)) {
     Serial.println("Card failed, or not present");
     // don't do anything more:
     
   }
- 
 }//end "setup()"
  
 void loop()
@@ -99,13 +98,13 @@ void loop()
   
   if (digitalRead(5) == 1)
   {
-    //DataToSD();
+    DataToSD();
     digitalWrite(9,LOW);
     digitalWrite(2, HIGH); 
   }
   else if (digitalRead(5) == 0)
   {
-    senddata();
+    //senddata();
     digitalWrite(2,LOW);
     digitalWrite(9, HIGH);
   }
@@ -181,7 +180,7 @@ void senddata()
   delay(2000);                                     // Wacht 2 seconden om command door te voeren
   printSerialData();                               // Gaat naar de "printSerialData()" methode
 
-  myGsm.println("AT+CIPSTART=\"TCP\",\"84.197.109.181\",\"350\"");   // Maakt verbinding met de server met publieke IP: 84.197.109.181 aan poort 350.
+  myGsm.println("AT+CIPSTART=\"TCP\",\"83.134.31.75\",\"350\"");   // Maakt verbinding met de server met publieke IP: 84.197.109.181 aan poort 350.
   delay(5000);                                    // Wacht 5 seconden om de verbinding te maken
   printSerialData();                              // Gaat naar de "printSerialData" methode                                    
 
@@ -221,7 +220,7 @@ void sendData()
     myGsm.print("&");
     myGsm.print(date);
     myGsm.print(" ");
-    myGsm.print(time);
+    myGsm.print(time+1000000);
     myGsm.print("&");
     myGsm.println("Ruben$");
     
@@ -253,7 +252,7 @@ void printData()
     Serial.println(flon,6);
     Serial.print(date);
     Serial.print(" ");
-    Serial.println(time);
+    Serial.println(time+1000000);
 }
 
 void DataToSD()
@@ -277,7 +276,7 @@ void DataToSD()
       dataFile.print("&");
       dataFile.print(date);
       dataFile.print(" ");
-      dataFile.print(time);
+      dataFile.print(time+1000000);
       dataFile.print("&");
       dataFile.print("Ruben&");
       dataFile.close();
@@ -289,7 +288,6 @@ void DataToSD()
   }
   else
   {
-      digitalWrite(2, HIGH);
       digitalWrite(9, HIGH);
       delay(500);
       digitalWrite(2,LOW);
