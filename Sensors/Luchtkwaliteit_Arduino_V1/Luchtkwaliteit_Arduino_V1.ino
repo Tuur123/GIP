@@ -91,9 +91,10 @@ void loop()
   GetDateTime();
   delay(2000);
   BH1750_();
-  delay(2000);
+  delay(6000);
   CCS_811();
   DHT11();
+
   printData();
   
   if (digitalRead(5) == 1)
@@ -123,11 +124,6 @@ void BH1750_()
 }
 void CCS_811()
 {
-      //Laat sensor CO2 waardes en tVOC waardes berekenen
-    ccs.readAlgorithmResults();
-    
-    //vraag CO2 waarde
-    CO2 = ccs.getCO2();
     //kijken of er data beschikbaar is
   if (ccs.dataAvailable())
   {  
