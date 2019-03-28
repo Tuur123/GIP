@@ -68,7 +68,7 @@
                             </asp:ChartArea>
                         </ChartAreas>
                     </asp:Chart>
-                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:connectionStringRuben %>" ProviderName="<%$ ConnectionStrings:connectionStringRuben.ProviderName %>" SelectCommand="SELECT DISTINCT [Vochtigheid], [Temperatuur], [CO2], [Tijd], [Lichtsterkte] FROM [Waardes] WHERE ([Gebruiker] = ?)">
+                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnStringServerArthur %>" ProviderName="<%$ ConnectionStrings:ConnStringServerArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Lichtsterkte], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
                         <SelectParameters>
                             <asp:ControlParameter ControlID="TbUser" DefaultValue="ruben" Name="Gebruiker" PropertyName="Text" Type="String" />
                         </SelectParameters>
