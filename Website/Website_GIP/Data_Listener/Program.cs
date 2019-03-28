@@ -42,7 +42,7 @@ namespace Data_Listener
                     clientData = clientData.Substring(0, clientData.IndexOf("$"));
                     string[] data = clientData.Split(new char[] { '&' });
 
-                    Console.WriteLine(" >> Data ontvangen van client: \n{0} \n{1} \n{2} \n{3} \n{4} \n{5} \n{6}", data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
+                    Console.WriteLine(" >> Data ontvangen van client: {0} {1} {2} {3} {4} {5} {6}", data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
                     string vochtigheid = data[0];
                     string temperatuur = data[1];
                     string lichtsterkte = data[2];
