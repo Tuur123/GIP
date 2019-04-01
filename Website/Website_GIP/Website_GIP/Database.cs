@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 
 public class Database
 {
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\arthur.dhooge\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
-    //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    //666private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
     
     public void AddUser(string hash, string name)
     {
@@ -141,12 +141,12 @@ public class Database
                     data[x] = reader[x].ToString();                   
                 }
 
-                data[0] = data[0].Replace('.', ',');
-                data[1] = data[1].Replace('.', ',');
+                //data[0] = data[0].Replace('.', ',');
+                //data[1] = data[1].Replace('.', ',');
 
                 coords.Add(Convert.ToDouble(data[1]));
                 coords.Add(Convert.ToDouble(data[0]));
-                
+                                 
                 desc = string.Format(@"Temperatuur: {1} <br/>Vochtigheid: {0} <br/>CO²: {2} <br/>Lichtsterkte: {3} <br/>Tijd van meting: {4}", data[3], data[4], data[5], data[6], data[7]);
                 
                 Properties properties = new Properties
