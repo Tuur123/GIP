@@ -98,13 +98,13 @@ void loop()
   
   if (digitalRead(5) == 1)
   {
-    DataToSD();
+    //DataToSD();
     digitalWrite(9,LOW);
     digitalWrite(2, HIGH); 
   }
   else if (digitalRead(5) == 0)
   {
-    //senddata();
+    senddata();
     digitalWrite(2,LOW);
     digitalWrite(9, HIGH);
   }
@@ -180,7 +180,7 @@ void senddata()
   delay(2000);                                     // Wacht 2 seconden om command door te voeren
   printSerialData();                               // Gaat naar de "printSerialData()" methode
 
-  myGsm.println("AT+CIPSTART=\"TCP\",\"83.134.31.75\",\"350\"");   // Maakt verbinding met de server met publieke IP: 84.197.109.181 aan poort 350.
+  myGsm.println("AT+CIPSTART=\"TCP\",\"thuisnetwerk.ddns.net\",\"350\"");   // Maakt verbinding met de server met publieke IP: 84.197.109.181 aan poort 350.
   delay(5000);                                    // Wacht 5 seconden om de verbinding te maken
   printSerialData();                              // Gaat naar de "printSerialData" methode                                    
 
