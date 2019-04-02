@@ -71,9 +71,9 @@ namespace Data_Listener
                     clientSocket.Close();
                     serverSocket.Stop();
                 }
-                catch (NotSupportedException error)
+                catch (Exception error)
                 {
-                    Console.WriteLine(error.ToString());
+                    Console.WriteLine(error.Message);
                 }
             }
         }   
