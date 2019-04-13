@@ -31,4 +31,12 @@
 
         map.addControl(new mapboxgl.NavigationControl());
     }
+
+    var window_width = $(window).width() - 280;
+    $("#chartdiv").css("width", window_width + "px");
+});
+
+$(window).resize(function () {
+    var window_width = $(window).width() - 280;
+    $("#chartdiv").css("width", window_width + "px");
 });
