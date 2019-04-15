@@ -104,9 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Home.aspx" />
-    <Content Include="map.js" />
+    <Content Include="Main.js" />
     <Content Include="Overons.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>

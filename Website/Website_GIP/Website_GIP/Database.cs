@@ -109,8 +109,15 @@ public class Database
 
     public string GetUserData(string name)
     {
-        RootObject rootObject = new RootObject();
+        UserData userData = new UserData();
+        Chart chart = new Chart();
+
         List<Feature> features = new List<Feature>();
+        List<string> tijd = new List<string>();
+        List<double> vocht = new List<double>();
+        List<double> temp = new List<double>();
+        List<int> licht = new List<int>();
+        List<int> co2 = new List<int>();
 
         string query = string.Format("SELECT Breedtegraad, Lengtegraad, Gebruiker, Vochtigheid, Temperatuur, CO2, Lichtsterkte, Tijd FROM Waardes WHERE Gebruiker='{0}'", name);
         string json = "";
@@ -146,7 +153,13 @@ public class Database
 
                 coords.Add(Convert.ToDouble(data[1]));
                 coords.Add(Convert.ToDouble(data[0]));
-                                 
+
+                vocht.Add(Convert.ToDouble(data[3]));
+                temp.Add(Convert.ToDouble(data[4]));
+                co2.Add(Convert.ToInt32(data[5]));
+                licht.Add(Convert.ToInt32(data[6]));
+                tijd.Add(data[7]);
+
                 desc = string.Format(@"Temperatuur: {1} <br/>Vochtigheid: {0} <br/>CO²: {2} <br/>Lichtsterkte: {3} <br/>Tijd van meting: {4}", data[3], data[4], data[5], data[6], data[7]);
                 
                 Properties properties = new Properties
@@ -169,9 +182,15 @@ public class Database
             }
             connection.Close();
 
-            rootObject.features = features;
-            
-            json = JsonConvert.SerializeObject(rootObject, Formatting.Indented);
+            chart.CO2 = co2;
+            chart.Licht = licht;
+            chart.Temp = temp;
+            chart.Tijd = tijd;
+            chart.Vocht = vocht;
+            userData.chart = chart;
+            userData.features = features;
+
+            json = JsonConvert.SerializeObject(userData, Formatting.Indented);
         }
         catch (Exception e)
         {
@@ -181,28 +200,38 @@ public class Database
         return json;
     }
 
-    public class Geometry
+    protected  internal class Geometry
     {
         public string type { get; set; }
         public List<double> coordinates { get; set; }
     }
 
-    public class Properties
+    protected internal class Properties
     {
         public string title { get; set; }
         public string description { get; set; }
     }
 
-    public class Feature
+    protected internal class Feature
     {
         public string type { get; set; }
         public Geometry geometry { get; set; }
         public Properties properties { get; set; }
     }
 
-    public class RootObject
+    protected internal class Chart
+    {
+        public List<string> Tijd { get; set; }
+        public List<int> CO2 { get; set; }
+        public List<double> Vocht { get; set; }
+        public List<double> Temp { get; set; }
+        public List<int> Licht { get; set; }
+    }
+
+    protected internal class UserData
     {
         public string type = "FeatureCollection";
         public List<Feature> features { get; set; }
+        public Chart chart { get; set; }
     }
 }

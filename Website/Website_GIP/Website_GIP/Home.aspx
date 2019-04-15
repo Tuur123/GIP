@@ -13,7 +13,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="map.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="Main.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
@@ -32,47 +33,12 @@
         <div class="row">
             <div class="leftcolumn">
                 <div class="card">
-                    <div id='map'></div>                
+                    <div id='map'></div>
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
-                    <asp:Chart ID="ChartTempHumi" runat="server" DataSourceID="DbCharts" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
-                        <Legends>
-                            <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
-                                LegendStyle="Row" />
-                        </Legends>
-                        <Series>
-                            <asp:Series ChartType="Spline" Name="Temperatuur" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="Temperatuur">
-                            </asp:Series>
-                            <asp:Series ChartType="Spline" Name="Vochtigheid" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="Vochtigheid">
-                            </asp:Series>
-                        </Series>
-                        <ChartAreas>
-                            <asp:ChartArea Name="ChartArea1">
-                                <AxisX Interval="50"></AxisX>
-                            </asp:ChartArea>
-                        </ChartAreas>
-                    </asp:Chart>
-                    <asp:Chart ID="ChartCO2" runat="server" DataSourceID="DbCharts" Width="900px" BackColor="DarkGray" BackGradientStyle="TopBottom" BackImageTransparentColor="255, 224, 192" BorderlineColor="Transparent">
-                        <Legends>
-                            <asp:Legend Alignment="Center" Docking="Bottom" IsTextAutoFit="False" Name="Default"
-                                LegendStyle="Row" />
-                        </Legends>
-                        <Series>
-                             <asp:Series ChartType="Spline" Name="CO2" XValueMember="Tijd" IsXValueIndexed="true" YValueMembers="CO2">
-                            </asp:Series>
-                        </Series>
-                        <ChartAreas>
-                            <asp:ChartArea Name="ChartArea1">
-                                <AxisX Interval="50"></AxisX>
-                            </asp:ChartArea>
-                        </ChartAreas>
-                    </asp:Chart>
-                    <asp:SqlDataSource ID="DbCharts" runat="server" ConnectionString="<%$ ConnectionStrings:ConnStringServerArthur %>" ProviderName="<%$ ConnectionStrings:ConnStringServerArthur.ProviderName %>" SelectCommand="SELECT [Vochtigheid], [Temperatuur], [CO2], [Lichtsterkte], [Tijd] FROM [Waardes] WHERE ([Gebruiker] = ?)">
-                        <SelectParameters>
-                            <asp:ControlParameter ControlID="TbUser" DefaultValue="ruben" Name="Gebruiker" PropertyName="Text" Type="String" />
-                        </SelectParameters>
-                    </asp:SqlDataSource>
+                    <canvas id="coChart"></canvas>
+                    <canvas id="tempVochtLichtChart"></canvas>                    
                 </div>
             </div>
             <div class="rightcolumn">

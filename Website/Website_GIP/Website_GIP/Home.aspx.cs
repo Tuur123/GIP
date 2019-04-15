@@ -97,14 +97,12 @@ namespace Website_GIP
         }
 
         [WebMethod]
-        public static string GetDataFromDB()
+        public static string GetData()
         {
             Database db = new Database();
 
             if (db.ValidateUser(userName) == userId)
                 return db.GetUserData(userName);
-            //Response.StatusCode = 401;
-            //Response.End();
             return null;
         }
     }
