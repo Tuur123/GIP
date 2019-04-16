@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Website_GIP.Home" %>
 
-<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 
 <!DOCTYPE html>
 
@@ -10,19 +9,19 @@
     <meta charset='utf-8' />
     <title>Luchtkwaliteit</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="Main.js"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
 </head>
 
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
         <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true">
-</asp:ScriptManager>
+        </asp:ScriptManager>
         <div class="header">
             <asp:ImageButton ID="home" runat="server"
                 ImageUrl="logo_Luchtkwaliteit.png"
@@ -37,8 +36,16 @@
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
+                    <div class="slidecontainer">
+                        <h3>Van</h3>
+                        <input type="range" min="0" max="200" value="10" class="slider" id="From" />
+                    </div>
+                    <div class="slidecontainer">
+                        <h3>Tot</h3>
+                        <input type="range" min="0" max="200" value="50" class="slider" id="Until" />
+                    </div>
                     <canvas id="coChart"></canvas>
-                    <canvas id="tempVochtLichtChart"></canvas>                    
+                    <canvas id="tempVochtLichtChart"></canvas>
                 </div>
             </div>
             <div class="rightcolumn">
@@ -67,15 +74,14 @@
                 </div>
                 <div class="card">
                     <h1>Metingen uploaden van een SD kaart:</h1>
-                    <input id="oFile" type="file" runat="server"  name="oFile"/>
-                    <asp:button id="btnUpload" type="submit" text="Upload" runat="server" OnClick="btnUpload_Click"></asp:button>
-                    <asp:Panel ID="frmConfirmation" Visible="False" Runat="server">
-                    <asp:Label id="lblUploadResult" Runat="server"></asp:Label>
+                    <input id="oFile" type="file" runat="server" name="oFile" />
+                    <asp:Button ID="btnUpload" type="submit" Text="Upload" runat="server" OnClick="btnUpload_Click"></asp:Button>
+                    <asp:Panel ID="frmConfirmation" Visible="False" runat="server">
+                        <asp:Label ID="lblUploadResult" runat="server"></asp:Label>
                     </asp:Panel>
                 </div>
             </div>
         </div>
-        
     </form>
 </body>
 </html>
