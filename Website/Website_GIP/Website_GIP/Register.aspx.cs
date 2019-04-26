@@ -15,7 +15,6 @@ namespace Website_GIP
         Database db = new Database();
         private Regex NameAllowedRegex = new Regex(@"^[a-zA-Z]{1}[a-zA-Z0-9\._\-]{0,23}[^.-]$", RegexOptions.Compiled);
         
-
         protected void Page_Load(object sender, EventArgs e)
         {
 

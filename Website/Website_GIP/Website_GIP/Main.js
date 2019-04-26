@@ -1,11 +1,40 @@
-﻿$(document).ready(function () {
+﻿let min = 0;
+let max = 100;
+var data;
 
-    var data;
-    let min = 0;
-    let max = 100;
+$(document).ready(function () {
+
+    PageMethods.GetData(drawElements);
 
     var sliderFrom = document.getElementById("From");
     var sliderUntil = document.getElementById("Until");
+    var spanVan = document.getElementById("van");
+    var spanTot = document.getElementById("tot");
+
+    sliderUntil.oninput = function () {
+
+        max = this.value;
+        drawCharts(min, max);
+        spanTot.innerHTML = data.chart.Tijd[max];
+    }
+
+    sliderFrom.oninput = function () {
+
+        min = this.value;
+        drawCharts(min, max);
+        spanVan.innerHTML = data.chart.Tijd[min];
+    }
+});
+
+function drawElements(response) {
+
+    data = JSON.parse(response);
+    console.log(data);
+    drawMap(data.features);
+    drawCharts(min, max);
+}
+
+function drawMap(features) {
 
     mapboxgl.accessToken = 'pk.eyJ1IjoicnViZW5hcnRodXIiLCJhIjoiY2pycXR6dnljMGJ3NDN5cGV5dGRlOWpqcSJ9.IeEQqzqf_kgs8J3rj2U5xw';
 
@@ -16,105 +45,77 @@
         zoom: 13
     });
 
-    PageMethods.GetData(drawElements);
+    // add markers to map
+    features.forEach(function (marker) {
+        // create a HTML element for each feature
+        var el = document.createElement('div');
+        el.className = 'marker';
 
-    function drawElements(response) {
-
-        data = JSON.parse(response);
-
-        console.log(data);
-        drawMap(data.features);
-    }
-
-    function drawMap(features) {
-
-        // add markers to map
-        features.forEach(function (marker) {
-            // create a HTML element for each feature
-            var el = document.createElement('div');
-            el.className = 'marker';
-
-            // make a marker for each feature and add to the map
-            new mapboxgl.Marker(el)
-                .setLngLat(marker.geometry.coordinates)
-                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
                 .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-                .addTo(map);
-        });
+            .addTo(map);
+    });
 
-        map.addControl(new mapboxgl.NavigationControl());
-    }
+    map.addControl(new mapboxgl.NavigationControl());
+}
 
-    //sliderUntil.max = data.chart.Tijd.length;
-    //sliderFrom.max = data.chart.Tijd.length;
+function drawCharts(min, max) {
 
-    sliderUntil.oninput = function () {
+    var ctxCo2 = document.getElementById('coChart').getContext('2d');
+    var coChart = new Chart(ctxCo2, {
+        // The type of chart we want to create
+        type: 'line',
 
-        max = this.value;
-        drawCharts(min, max);
-        console.log(max);
-    }
+        // The data for our dataset
+        data: {
+            labels: data.chart.Tijd.slice(min, max),
+            datasets: [{
+                label: 'CO₂',
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: data.chart.CO2.slice(min, max)
+            }]
+        },
 
-    sliderFrom.oninput = function () {
+        // Configuration options go here
+        options: {}
+    });
 
-        min = this.value;
-        drawCharts(min, max);
-        console.log(min);
-    }
+    var ctx = document.getElementById("tempVochtLichtChart").getContext("2d");
+    var chart = new Chart(ctx, {
 
-    function drawCharts(min, max) {
-
-        var ctxCo2 = document.getElementById('coChart').getContext('2d');
-        var coChart = new Chart(ctxCo2, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: data.chart.Tijd.slice(min, max),
-                datasets: [{
-                    label: 'CO₂',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: data.chart.CO2.slice(min, max)
-                }]
-            },
-
-            // Configuration options go here
-            options: {}
-        });
-
-        var ctx = document.getElementById("tempVochtLichtChart").getContext("2d");
-        var chart = new Chart(ctx, {
-
-            options: {},
-            type: 'line',
-            data: {
-                labels: data.chart.Tijd.slice(min, max),
-                datasets: [
-                    {
-                        label: 'Temperatuur',
-                        backgroundColor: 'rgb(21,142,255)',
-                        borderColor: 'rgb(21,142,255)',
-                        data: data.chart.Temp.slice(min, max)
-                    },
-                    {
-                        label: 'Vochtigheid',
-                        fill: true,
-                        backgroundColor: 'rgb(66,255,153)',
-                        borderColor: 'rgb(66,255,153)',
-                        data: data.chart.Vocht.slice(min, max)
-                    },
-                    {
-                        label: 'Lichtsterkte',
-                        fill: true,
-                        backgroundColor: 'rgb(255,255,0)',
-                        borderColor: 'rgb(255,255,0)',
-                        data: data.chart.Licht.slice(min, max)
-                    }
-                ]
-            }
-        });
-    }
-});
+        options: {},
+        type: 'line',
+        data: {
+            labels: data.chart.Tijd.slice(min, max),
+            datasets: [
+                {
+                    label: 'Temperatuur',
+                    fill: false,
+                    backgroundColor: 'rgb(21,142,255)',
+                    borderColor: 'rgb(21,142,255)',
+                    data: data.chart.Temp.slice(min, max)
+                },
+                {
+                    label: 'Vochtigheid',
+                    fill: false,
+                    backgroundColor: 'rgb(66,255,153)',
+                    borderColor: 'rgb(66,255,153)',
+                    data: data.chart.Vocht.slice(min, max)
+                },
+                {
+                    label: 'Lichtsterkte',
+                    fill: false,
+                    backgroundColor: 'rgb(255,255,0)',
+                    borderColor: 'rgb(255,255,0)',
+                    data: data.chart.Licht.slice(min, max)
+                }
+            ]
+        }
+    });
+}
 
