@@ -37,11 +37,11 @@
                 <div class="card">
                     <h2>Grafieken</h2>
                     <div class="slidecontainer">
-                        <h3>Van</h3>
+                        <h3>Van <span id="van"></span></h3>
                         <input type="range" min="0" max="200" value="10" class="slider" id="From" />
                     </div>
                     <div class="slidecontainer">
-                        <h3>Tot</h3>
+                        <h3>Tot <span id="tot"></span></h3>
                         <input type="range" min="0" max="200" value="50" class="slider" id="Until" />
                     </div>
                     <canvas id="coChart"></canvas>
