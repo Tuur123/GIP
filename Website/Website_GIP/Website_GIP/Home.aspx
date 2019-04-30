@@ -16,6 +16,7 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -82,6 +83,18 @@
                 </div>
             </div>
         </div>
+        <div id="footer">
+		    <!-- Footer start -->
+		    <H2>Over ons</H2>
+            <h2>Contacteren</h2>
+
+            <a href="https://www.facebook.com/pages/Gitok/228181723916129" class="fa fa-facebook"></a>
+            <a href="https://twitter.com/gitok_kalmthout" class="fa fa-twitter"></a>
+            <a href="https://www.linkedin.com/company/gitok" class="fa fa-linkedin"></a>
+            <a href="https://www.instagram.com/gitok_kalmthout/" class="fa fa-instagram"></a>
+
+		    <!-- Footer end -->
+	    </div>
     </form>
 </body>
 </html>
