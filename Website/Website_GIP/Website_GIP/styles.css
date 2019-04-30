@@ -30,7 +30,7 @@ p {
     height: 20%;
 }
 
-/*Vanaf hier*/
+/*website indeling*/
 * {
     box-sizing: border-box;
 }
@@ -53,7 +53,7 @@ body {
         font-size: 50px;
     }
 
-/* Style the top navigation bar */
+/* top navigation bar */
 .topnav {
     overflow: hidden;
     color: white;
@@ -69,17 +69,15 @@ body {
         text-decoration: none;
     }
 
-/* Change color on hover 
-        .topnav a:hover {
-            color: white;
-        }*/
+
 /* Create two unequal columns that floats next to each other */
-/* Left column */
+/* right column */
 .leftcolumn {
     float: left;
     width: 70%;
 }
 
+/* left column */
 .rightcolumn {
     float: left;
     width: 30%;
@@ -101,12 +99,46 @@ body {
     clear: both;
 }
 /* Footer */
-footer {
-    padding: 20px;
-    text-align: center;
-    background-color: white;
-    margin-top: 20px;
+	#footer {
+        text-align:center;
+        padding-left:20px;
+		bottom:0;
+		width:100%;
+        background-color: white;
+        padding: 20px;
+        margin-top: 20px;
+	}
+
+        .fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
 }
+
+.fa:hover {
+    opacity: 0.7;
+}
+    .fa-facebook {
+      background: #3B5998;
+      color: white;
+    }
+
+    .fa-twitter {
+      background: #55ACEE;
+      color: white;
+    }
+    .fa-linkedin {
+      background: #007bb5;
+      color: white;
+    }
+
+    .fa-instagram {
+      background: #125688;
+      color: white;
+    }
 
 .slidecontainer {
     width: 100%; /* Width of the outside container */
