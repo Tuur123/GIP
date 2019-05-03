@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+File: Program.cs
+Project: Listener
+Funcion: database communication class
+Authors: Arthur d'Hooge, Ruben Socquet
+Project: GIP 2019
+
+2018-2019
+Kalmthout
+*/
+
+using System;
 using System.Data.OleDb;
 
 public class Database_Listener

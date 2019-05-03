@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+File: Database.cs
+Project: Website
+Function: database communication class
+Authors: Arthur d'Hooge, Ruben Socquet
+Project: GIP 2019
+
+2018-2019
+Kalmthout
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using Newtonsoft.Json;
