@@ -50,8 +50,9 @@ namespace Data_Listener
 
                     foreach(string str in data)
                     {
-                        if (str == "0" || str == "" || str == null)
+                        if (str == "" || str == null)
                         {
+                            Console.Write(str + "   ");
                             dataCorrupt = true;
                             break;
                         }
@@ -59,26 +60,33 @@ namespace Data_Listener
 
                     if (!dataCorrupt)
                     {
-                        Console.WriteLine(" >> Data ontvangen van client: {0} {1} {2} {3} {4} {5} {6}", data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
-                        string vochtigheid = data[0];
-                        string temperatuur = data[1];
-                        string lichtsterkte = data[2];
-                        string CO2 = data[3];
-                        string breedtegraad = data[4];
-                        string lengtegraad = data[5];
-
-                        if (data[6].Length >= 12)
+                        try
                         {
-                            data[6] = data[6].Insert(2, "-");
-                            data[6] = data[6].Insert(5, "-");
-                            data[6] = data[6].Insert(11, ":");
-                            data[6] = data[6].Insert(14, ":");
-                            data[6] = data[6].Insert(17, ":");
-                        }
-                        string time = data[6];
-                        string user = data[7];
+                            Console.WriteLine(" >> Data ontvangen van client: {0} {1} {2} {3} {4} {5} {6}", data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
+                            string vochtigheid = data[0];
+                            string temperatuur = data[1];
+                            string lichtsterkte = data[2];
+                            string CO2 = data[3];
+                            string breedtegraad = data[4];
+                            string lengtegraad = data[5];
 
-                        db.AddData(vochtigheid, temperatuur, lichtsterkte, CO2, breedtegraad, lengtegraad, time, user);
+                            if (data[6].Length >= 12)
+                            {
+                                data[6] = data[6].Insert(2, "-");
+                                data[6] = data[6].Insert(5, "-");
+                                data[6] = data[6].Insert(11, ":");
+                                data[6] = data[6].Insert(14, ":");
+                                data[6] = data[6].Insert(17, ":");
+                            }
+                            string time = data[6];
+                            string user = data[7];
+
+                            db.AddData(vochtigheid, temperatuur, lichtsterkte, CO2, breedtegraad, lengtegraad, time, user);
+                        }
+                        catch(Exception error)
+                        {
+                            Console.WriteLine(error);
+                        }
                     }
                     else
                     {

@@ -95,7 +95,7 @@ Kalmthout
         </div>
         <div id="footer">
 		    <!-- Footer start -->
-		    <H2>Over ons</H2>
+		    <asp:LinkButton ID="OverOns" runat="server" Text="Over Ons" OnClick="BtnOverons_Click"></asp:LinkButton>
             <h2>Contacteren</h2>
 
             <a href="https://www.facebook.com/pages/Gitok/228181723916129" class="fa fa-facebook"></a>

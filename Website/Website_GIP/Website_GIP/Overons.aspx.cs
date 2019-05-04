@@ -13,7 +13,7 @@ namespace Website_GIP
         {
 
         }
-        protected void BtnOverons_Click1(object sender, EventArgs e)
+        protected void BtnOverons_Click(object sender, EventArgs e)
         {
             Response.Redirect("Overons.aspx");
         }

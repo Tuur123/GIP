@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Luchtkwaliteit</title>
 </head>
 <body>
@@ -37,10 +38,18 @@
             </div>
         </div>
     </div>
-    <div class="footer">
-        <h2>Footer</h2>
-        <asp:Button ID="BtnOverons" runat="server" Text="Over ons" Width="75%" OnClick="BtnOverons_Click1" />
-    </div>
+        <div id="footer">
+		    <!-- Footer start -->
+		    <asp:LinkButton ID="OverOns" runat="server" Text="Over Ons" OnClick="BtnOverons_Click"></asp:LinkButton>
+            <h2>Contacteren</h2>
+
+            <a href="https://www.facebook.com/pages/Gitok/228181723916129" class="fa fa-facebook"></a>
+            <a href="https://twitter.com/gitok_kalmthout" class="fa fa-twitter"></a>
+            <a href="https://www.linkedin.com/company/gitok" class="fa fa-linkedin"></a>
+            <a href="https://www.instagram.com/gitok_kalmthout/" class="fa fa-instagram"></a>
+
+		    <!-- Footer end -->
+	    </div>
     </form>
 </body>
 </html>

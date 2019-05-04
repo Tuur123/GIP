@@ -23,7 +23,7 @@ public class Database_Listener
 
         try
         {
-            connection.ConnectionString = connStringArthur;
+            connection.ConnectionString = connStringRuben;
             connection.Open();
             OleDbCommand command = new OleDbCommand
             {
