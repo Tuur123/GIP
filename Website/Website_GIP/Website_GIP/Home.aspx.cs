@@ -1,7 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿/*
+File: Home.aspx.cs
+Funcion:  back-end code for Home.aspx
+Authors: Arthur d'Hooge, Ruben Socquet
+Project: GIP 2019
+
+2018-2019
+Kalmthout
+*/
+
+using System;
 using System.Web.UI;
 using System.Text;
 using System.IO;

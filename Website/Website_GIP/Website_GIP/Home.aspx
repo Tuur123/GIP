@@ -1,5 +1,15 @@
-﻿<%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Website_GIP.Home" %>
+﻿<!--
+File: Home.aspx
+Project: Website
+Function: Home page
+Authors: Arthur d'Hooge, Ruben Socquet
+Project: GIP 2019
 
+2018-2019
+Kalmthout
+-->
+
+<%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Website_GIP.Home" %>
 
 <!DOCTYPE html>
 

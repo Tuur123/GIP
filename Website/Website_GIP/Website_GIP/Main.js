@@ -1,6 +1,17 @@
-﻿let min = 0;
-let max = 100;
+﻿/*
+File: Main.js
+Project: Website
+Function: client-side code for Home.aspx
+Authors: Arthur d'Hooge, Ruben Socquet
+Project: GIP 2019
+
+2018-2019
+Kalmthout
+*/
+
 var data;
+let min = 0;
+let max = 100;
 
 $(document).ready(function () {
 
@@ -58,7 +69,6 @@ function drawMap(features) {
                 .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
             .addTo(map);
     });
-
     map.addControl(new mapboxgl.NavigationControl());
 }
 
@@ -118,4 +128,3 @@ function drawCharts(min, max) {
         }
     });
 }
-

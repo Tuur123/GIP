@@ -1,9 +1,18 @@
-﻿<%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Website_GIP.Register" %>
+﻿<!--
+File: Register.aspx
+Funcion: Register page
+Project: Website
+Authors: Arthur d'Hooge, Ruben Socquet
+Project: GIP 2019
+
+2018-2019
+Kalmthout
+-->
+
+<%@ Page Language="C#" EnableViewState="true" ViewStateEncryptionMode="Always" EnableViewStateMac="true" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Website_GIP.Register" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head runat="server">
 
     <title>Registreer</title>

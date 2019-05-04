@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*
+File: Program.cs
+Project: Listener
+Funcion: database communication program
+Authors: Arthur d'Hooge, Ruben Socquet
+Project: GIP 2019
+
+2018-2019
+Kalmthout
+*/
+
+using System;
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
