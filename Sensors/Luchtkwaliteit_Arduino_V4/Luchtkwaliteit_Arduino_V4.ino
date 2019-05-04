@@ -11,7 +11,7 @@
 // Constanten definieren
 #define sd 2
 #define gprs 9
-#define dht_pin 6
+#define dht_pin 6 
 #define dataSelect 5
 #define baudRate 9600
 #define chipSelect 10
@@ -52,9 +52,6 @@ void setup() {
   gsm.begin(baudRate);
   gpsSerial.begin(baudRate);
 
-  // De gsm module opstarten en configureren
-  //InitGsm();
-
   digitalWrite(gprs, LOW);
   digitalWrite(sd, HIGH);
 
@@ -91,7 +88,8 @@ void loop() {
   }
   else if (digitalRead(dataSelect) == 0)
   {
-    DataGPRS();
+      // De gsm module opstarten en configureren
+    InitGsm();
     digitalWrite(gprs, HIGH);
     digitalWrite(sd, LOW);
   }
@@ -239,11 +237,18 @@ void InitGsm()
   gsm.println("AT+CIFSR");                       // Command om het IP adress van de SIM900 te verkrijgen
   delay(2000);                                     // Wacht 2 seconden om command door te voeren
 
-  gsm.println("AT+CIPSTART=\"TCP\",\"thuisnetwerk.ddns.net\",\"350\"");   // Maakt verbinding met de server met publieke IP: 84.197.109.181 aan poort 350.
+  gsm.println("AT+CIPSTART=\"TCP\",\"luchtkwaliteit.ddns.net\",\"350\"");   // Maakt verbinding met de server met publieke IP: 84.197.109.181 aan poort 350.
   delay(5000);                                    // Wacht 5 seconden om de verbinding te maken
 
   gsm.println("AT+CIPSEND");                    // Deze command wordt gebruikt om de data naar de server te sturen
   delay(2000);                                    // Wacht 2 seconden om de command door te voeren
+
+  DataGPRS();
+  delay(3000);                                    // Wacht 3 seconden
+  gsm.println("AT+CIPCLOSE");                   // Communicatie wordt gesloten na het verzenden van de data
+
+  gsm.println("AT+CIPSHUT");                    // Zorgt ervoor dat de connectie met de server zeker gesloten wordt.
+  delay(1000);                                    // Wacht 1 seconde
 }
 
 // Blink leds
