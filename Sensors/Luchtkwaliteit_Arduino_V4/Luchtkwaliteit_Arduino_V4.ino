@@ -88,7 +88,7 @@ void loop() {
   }
   else if (digitalRead(dataSelect) == 0)
   {
-      // De gsm module opstarten en configureren
+    // De gsm module opstarten en configureren
     InitGsm();
     digitalWrite(gprs, HIGH);
     digitalWrite(sd, LOW);
