@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website_GIP\Webs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Listener", "Data_Listener\Data_Listener.csproj", "{E8CCFF77-9233-4551-8B31-A38E8FCC3171}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flasher", "Flasher\Flasher.csproj", "{193045D8-742B-486A-8C81-7540A6F02095}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{E8CCFF77-9233-4551-8B31-A38E8FCC3171}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8CCFF77-9233-4551-8B31-A38E8FCC3171}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8CCFF77-9233-4551-8B31-A38E8FCC3171}.Release|Any CPU.Build.0 = Release|Any CPU
-		{193045D8-742B-486A-8C81-7540A6F02095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{193045D8-742B-486A-8C81-7540A6F02095}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{193045D8-742B-486A-8C81-7540A6F02095}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{193045D8-742B-486A-8C81-7540A6F02095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
