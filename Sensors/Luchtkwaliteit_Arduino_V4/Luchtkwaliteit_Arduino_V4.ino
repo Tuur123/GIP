@@ -238,7 +238,7 @@ void InitGsm()
   gsm.println("AT+CIFSR");                       // Command om het IP adress van de SIM900 te verkrijgen
   delay(2000);                                     // Wacht 2 seconden om command door te voeren
 
-  gsm.println("AT+CIPSTART=\"TCP\",\"84.197.109.181\",\"350\"");   // Maakt verbinding met de server met publieke Ruben IP: 84.197.109.181 Arthur: luchtkwaliteit.ddns.net aan poort 350.
+  gsm.println("AT+CIPSTART=\"TCP\",\"luchtkwaliteit.ddns.net\",\"350\"");   // Maakt verbinding met de server met publieke Ruben IP: 84.197.109.181 Arthur: luchtkwaliteit.ddns.net aan poort 350.
   delay(5000);                                    // Wacht 5 seconden om de verbinding te maken
 
   gsm.println("AT+CIPSEND");                    // Deze command wordt gebruikt om de data naar de server te sturen
