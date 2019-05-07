@@ -73,7 +73,7 @@ Kalmthout
                     <asp:Button ID="BtnRegister" runat="server" Text="Registreer" Width="75%" OnClick="BtnRegister_Click" />
                     <br />
                     <br />
-                    <asp:Label ID="LblUser" runat="server" Text="Log in om persoonlijke metingen te zien!"></asp:Label>
+                    <asp:Label ID="LblUser" runat="server" Text="Log in om je persoonlijke metingen te zien!"></asp:Label>
                 </div>
                 <div class="card">
                     <article class="ac-aircheckr-widget"
@@ -90,6 +90,10 @@ Kalmthout
                     <asp:Panel ID="frmConfirmation" Visible="False" runat="server">
                         <asp:Label ID="lblUploadResult" runat="server"></asp:Label>
                     </asp:Panel>
+                </div>
+                <div class="card">
+                    <h1>Verwijder al je data:</h1>
+                    <asp:Button ID="BtnDataDelete" runat="server" Text="Delete" OnClick="BtnDataDelete_Click" />
                 </div>
             </div>
         </div>

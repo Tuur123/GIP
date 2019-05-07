@@ -85,6 +85,15 @@ namespace Website_GIP {
         protected global::System.Web.UI.WebControls.Label LblUser;
         
         /// <summary>
+        /// BtnDataDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnDataDelete;
+        
+        /// <summary>
         /// OverOns control.
         /// </summary>
         /// <remarks>

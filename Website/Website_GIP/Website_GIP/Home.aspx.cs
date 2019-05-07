@@ -80,6 +80,11 @@ namespace Website_GIP
             Response.Redirect("Home.aspx");
         }
 
+        protected void BtnDataDelete_Click(object sender, EventArgs e)
+        {
+            db.Delete(userName);
+        }
+
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             string strFileName;
