@@ -99,14 +99,14 @@ Kalmthout
         </div>
         <div id="footer">
 		    <!-- Footer start -->
-		    <asp:LinkButton ID="OverOns" runat="server" Text="Over Ons" OnClick="BtnOverons_Click"></asp:LinkButton>
-            <h2>Contacteren</h2>
+		    <h2><asp:LinkButton ID="OverOns" runat="server" Text="Over Ons" OnClick="BtnOverons_Click"></asp:LinkButton></h2>
+            <h2>Contacteren:</h2>
 
             <a href="https://www.facebook.com/pages/Gitok/228181723916129" class="fa fa-facebook"></a>
             <a href="https://twitter.com/gitok_kalmthout" class="fa fa-twitter"></a>
             <a href="https://www.linkedin.com/company/gitok" class="fa fa-linkedin"></a>
             <a href="https://www.instagram.com/gitok_kalmthout/" class="fa fa-instagram"></a>
-
+            <a style="background: #dd4b39; color:white" href="mailto:ruben.arthur1@gmail.com" class="fa fa-google"></a>
 		    <!-- Footer end -->
 	    </div>
     </form>

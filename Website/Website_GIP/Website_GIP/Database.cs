@@ -56,6 +56,7 @@ public class Database
     public void AddSD(string data)
     {
         string DataString = data;
+        bool dataCorrupt = false;
 
         string[] DataArray;
 
@@ -64,13 +65,23 @@ public class Database
 
         for (int x = 0; x < DataArray.Length - 1; x++)
         {
-            if (DataArray[x + 6].Length >= 12)
+           if (DataArray[x + 4] == "100.000000" || DataArray[x + 5] == "100.000000")
             {
-                DataArray[x + 6] = DataArray[x + 6].Insert(2, "-");
-                DataArray[x + 6] = DataArray[x + 6].Insert(5, "-");
-                DataArray[x + 6] = DataArray[x + 6].Insert(11, ":");
-                DataArray[x + 6] = DataArray[x + 6].Insert(14, ":");
-                DataArray[x + 6] = DataArray[x + 6].Insert(17, ":");
+                dataCorrupt = true;
+            }
+           if (dataCorrupt == false)
+            {
+                if (DataArray[x + 6].Length >= 12)
+                {
+                    DataArray[x + 6] = DataArray[x + 6].Insert(2, "-");
+                    DataArray[x + 6] = DataArray[x + 6].Insert(5, "-");
+                    DataArray[x + 6] = DataArray[x + 6].Insert(11, ":");
+                    DataArray[x + 6] = DataArray[x + 6].Insert(14, ":");
+                    DataArray[x + 6] = DataArray[x + 6].Insert(17, ":");
+                }
+
+                DataArray[x + 4] = DataArray[x + 4].Replace('.' , ',' );
+                DataArray[x + 5] = DataArray[x + 5].Replace('.', ',');
             }
 
             DataToDB(DataArray[x], DataArray[x + 1], DataArray[x + 2], DataArray[x + 3], DataArray[x + 4], DataArray[x + 5], DataArray[x + 6], DataArray[x + 7]);

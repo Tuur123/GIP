@@ -67,8 +67,8 @@ namespace Data_Listener
                             string temperatuur = data[1];
                             string lichtsterkte = data[2];
                             string CO2 = data[3];
-                            string breedtegraad = data[4];
-                            string lengtegraad = data[5];
+                            string breedtegraad = data[4].Replace('.', ',');
+                            string lengtegraad = data[5].Replace('.', ',');
 
                             if (data[6].Length >= 12)
                             {

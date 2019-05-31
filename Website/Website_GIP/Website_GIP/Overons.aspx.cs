@@ -22,5 +22,10 @@ namespace Website_GIP
         {
             Response.Redirect("Home.aspx");
         }
+
+        protected void Home_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
+        }
     }
 }
