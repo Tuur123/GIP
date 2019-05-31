@@ -80,18 +80,25 @@ void loop() {
   DHT11();
   DataSerial();
 
-  if (digitalRead(dataSelect) == 1)
+  if ((flat,6) != "1000.000000")
   {
-    DataSD();
-    digitalWrite(gprs, LOW);
-    digitalWrite(sd, HIGH);
+      if (digitalRead(dataSelect) == 1)
+      {
+        DataSD();
+        digitalWrite(gprs, LOW);
+        digitalWrite(sd, HIGH);
+      }
+      else if (digitalRead(dataSelect) == 0)
+      {
+        // De gsm module opstarten en configureren
+        InitGsm();
+        digitalWrite(gprs, HIGH);
+        digitalWrite(sd, LOW);
+      }
   }
-  else if (digitalRead(dataSelect) == 0)
+  else
   {
-    // De gsm module opstarten en configureren
-    InitGsm();
-    digitalWrite(gprs, HIGH);
-    digitalWrite(sd, LOW);
+    BlinkLeds();
   }
 }
 
@@ -168,6 +175,7 @@ void DataSD()
     dataFile.print(time + 1000000);
     dataFile.print("&");
     dataFile.print(userName);
+    dataFile.print("&");
     dataFile.close();
   }
 
