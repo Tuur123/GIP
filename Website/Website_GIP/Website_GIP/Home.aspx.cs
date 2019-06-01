@@ -22,7 +22,7 @@ namespace Website_GIP
     public partial class Home : Page
     {
         Database db = new Database();
-        public static string markers, userName, userId = null;
+        public static string markers, userName, userHash = null;
 
         protected Button btnUpload;
         protected Label lblUploadResult;
@@ -47,11 +47,11 @@ namespace Website_GIP
             string[] loginMessage = { "Verkeerde wachtwoord of gebruikersnaam!", "U bent al ingelogd!" };
             // met de userId kan de gebruiker zich authenticeren;
 
-            userId = ComputeHash(TbUser.Text + TbPassword.Text);
+            userHash = ComputeHash(TbUser.Text + TbPassword.Text);
             if (Convert.ToBoolean(ViewState["Login"]))
                 Response.Write("<script>alert('" + loginMessage[1] + "')</script>");
 
-            else if (userId == db.ValidateUser(TbUser.Text))
+            else if (userHash == db.GetHash(TbUser.Text))
             {
                 //user heeft geldig passwoord en gebruikersnaam en mag ingelogd worden
                 ViewState["Login"] = true;
@@ -113,7 +113,7 @@ namespace Website_GIP
         {
             Database db = new Database();
 
-            if (db.ValidateUser(userName) == userId)
+            if (db.GetHash(userName) == userHash)
                 return db.GetUserData(userName);
             return null;
         }

@@ -13,12 +13,15 @@ using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http;
 
 public class Database
 {
-    //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
-    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+    //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
     //private readonly string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\leerling\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+
     public void AddUser(string hash, string name)
     {
         string query = string.Format("INSERT INTO Users(Hash, Naam) VALUES('{0}', '{1}')", hash, name);
@@ -84,12 +87,27 @@ public class Database
                 DataArray[x + 5] = DataArray[x + 5].Replace('.', ',');
             }
 
-            DataToDB(DataArray[x], DataArray[x + 1], DataArray[x + 2], DataArray[x + 3], DataArray[x + 4], DataArray[x + 5], DataArray[x + 6], DataArray[x + 7]);
+            string query = string.Format("json?key=2dacfb3978c248c497fffefc37f76ca4&q={0}%2C+{1}&pretty=1&no_annotations=1", DataArray[x + 4], DataArray[x + 5]);
+            string result;
+
+            Console.WriteLine("Making API Call...");
+            Gemeente.GemeenteData gm = new Gemeente.GemeenteData();
+
+            using (var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }))
+            {
+                client.BaseAddress = new Uri("https://api.opencagedata.com/geocode/v1/");
+                HttpResponseMessage response = client.GetAsync(query).Result;
+                response.EnsureSuccessStatusCode();
+                result = response.Content.ReadAsStringAsync().Result;
+            }
+            JsonConvert.PopulateObject(result, gm);
+
+            AddData(DataArray[x], DataArray[x + 1], DataArray[x + 2], DataArray[x + 3], DataArray[x + 4], DataArray[x + 5], DataArray[x + 6], DataArray[x + 7], gm.results[0].components.postcode);
             x = x + 7;
         }
     }
 
-    public void DataToDB(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string time, string user)
+    public void AddData(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string time, string user, string gemeente)
     {
         OleDbConnection connection = new OleDbConnection();
 
@@ -100,7 +118,7 @@ public class Database
             OleDbCommand command = new OleDbCommand
             {
                 Connection = connection,
-                CommandText = string.Format("INSERT INTO Waardes(Vochtigheid, Temperatuur, CO2, Lichtsterkte, Gebruiker, Tijd, Breedtegraad, lengtegraad) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}');", vochtigheid, temperatuur, CO2, lichtsterkte, user, time, breedtegraad, lengtegraad)
+                CommandText = string.Format("INSERT INTO Waardes(Vochtigheid, Temperatuur, CO2, Lichtsterkte, Gebruiker, Tijd, Breedtegraad, Lengtegraad, Gemeente) VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}');", vochtigheid, temperatuur, CO2, lichtsterkte, user, time, breedtegraad, lengtegraad, gemeente)
             };
 
             command.ExecuteNonQuery();
@@ -115,7 +133,7 @@ public class Database
         }
     }
 
-    public string ValidateUser(string name)
+    public string GetHash(string name)
     {
         string query = string.Format("SELECT Hash FROM Users WHERE Naam ='{0}'", name);
         string result = null;
@@ -187,8 +205,8 @@ public class Database
                     data[x] = reader[x].ToString();
                 }
 
-                //data[0] = data[0].Replace('.', ',');
-                //data[1] = data[1].Replace('.', ',');
+                data[0] = data[0].Replace(',', '.');
+                data[1] = data[1].Replace(',', '.');
 
                 coords.Add(Convert.ToDouble(data[1]));
                 coords.Add(Convert.ToDouble(data[0]));
