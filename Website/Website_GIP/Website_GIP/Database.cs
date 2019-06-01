@@ -171,12 +171,13 @@ public class Database
 
         List<Feature> features = new List<Feature>();
         List<string> tijd = new List<string>();
+        List<string> gemeente = new List<string>();
         List<double> vocht = new List<double>();
         List<double> temp = new List<double>();
         List<int> licht = new List<int>();
         List<int> co2 = new List<int>();
 
-        string query = string.Format("SELECT Breedtegraad, Lengtegraad, Gebruiker, Vochtigheid, Temperatuur, CO2, Lichtsterkte, Tijd FROM Waardes WHERE Gebruiker='{0}'", name);
+        string query = string.Format("SELECT Breedtegraad, Lengtegraad, Gebruiker, Vochtigheid, Temperatuur, CO2, Lichtsterkte, Tijd, Gemeente FROM Waardes WHERE Gebruiker='{0}'", name);
         string json = "";
 
         try
@@ -192,14 +193,14 @@ public class Database
             };
             OleDbDataReader reader = command.ExecuteReader();
 
-            string[] data = new string[8];
+            string[] data = new string[9];
             string desc;
 
             while (reader.Read())
             {
                 List<double> coords = new List<double>();
 
-                for (int x = 0; x < 8; x++)
+                for (int x = 0; x < 9; x++)
                 {
                     // Lat, Long, User, Vochtigheid, Temp, CO2, Licht, Time
                     data[x] = reader[x].ToString();
@@ -216,6 +217,7 @@ public class Database
                 co2.Add(Convert.ToInt32(data[5]));
                 licht.Add(Convert.ToInt32(data[6]));
                 tijd.Add(data[7]);
+                gemeente.Add(data[8]);
 
                 desc = string.Format(@"Temperatuur: {1} <br/>Vochtigheid: {0} <br/>CO²: {2} <br/>Lichtsterkte: {3} <br/>Tijd van meting: {4}", data[3], data[4], data[5], data[6], data[7]);
 
@@ -244,6 +246,7 @@ public class Database
             chart.Temp = temp;
             chart.Tijd = tijd;
             chart.Vocht = vocht;
+            chart.Gemeente = gemeente;
             userData.chart = chart;
             userData.features = features;
 
@@ -283,6 +286,7 @@ public class Database
         public List<double> Vocht { get; set; }
         public List<double> Temp { get; set; }
         public List<int> Licht { get; set; }
+        public List<string> Gemeente { get; set; }
     }
 
     protected internal class UserData
