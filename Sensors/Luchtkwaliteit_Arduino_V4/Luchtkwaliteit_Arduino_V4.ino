@@ -58,7 +58,6 @@ void setup() {
   // Sensors initialiseren
   LichtSensor.begin();
   ccs.begin();
-
   digitalWrite(gprs, HIGH);
   digitalWrite(sd, LOW);
 
@@ -80,21 +79,18 @@ void loop() {
   DHT11();
   DataSerial();
 
-  if ((flat,6) != "1000.000000")
+  if (digitalRead(dataSelect) == 1)
   {
-      if (digitalRead(dataSelect) == 1)
-      {
-        DataSD();
-        digitalWrite(gprs, LOW);
-        digitalWrite(sd, HIGH);
-      }
-      else if (digitalRead(dataSelect) == 0)
-      {
-        // De gsm module opstarten en configureren
-        InitGsm();
-        digitalWrite(gprs, HIGH);
-        digitalWrite(sd, LOW);
-      }
+    DataSD();
+    digitalWrite(gprs, LOW);
+    digitalWrite(sd, HIGH);
+  }
+  else if (digitalRead(dataSelect) == 0)
+  {
+    // De gsm module opstarten en configureren
+    InitGsm();
+    digitalWrite(gprs, HIGH);
+    digitalWrite(sd, LOW);
   }
   else
   {
