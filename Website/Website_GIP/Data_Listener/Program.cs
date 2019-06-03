@@ -126,8 +126,6 @@ namespace Website_GIP
                 {
                     Console.WriteLine(error.Message);
                 }
-
-                Console.ReadLine();
             }
         }
 
