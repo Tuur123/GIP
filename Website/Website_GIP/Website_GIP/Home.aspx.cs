@@ -85,6 +85,10 @@ namespace Website_GIP
             db.Delete(userName);
         }
 
+        protected void BtnGemeente_Click(object sender, EventArgs e)
+        {
+
+        }
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             string strFileName;

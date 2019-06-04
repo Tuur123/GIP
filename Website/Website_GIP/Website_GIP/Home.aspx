@@ -47,6 +47,8 @@ Kalmthout
                 </div>
                 <div class="card">
                     <h2>Grafieken</h2>
+                    <asp:TextBox ID="TbGemeente" runat="server">postcode</asp:TextBox>
+                    <asp:Button ID="BtnGemeente" runat="server" Text="oke" OnClick="BtnGemeente_Click" />
                     <div class="slidecontainer">
                         <h3>Van <span id="van"></span></h3>
                         <input type="range" min="0" max="200" value="10" class="slider" id="From" />

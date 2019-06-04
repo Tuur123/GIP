@@ -53,7 +53,7 @@ namespace Website_GIP
 
                     foreach (string str in data)
                     {
-                        if (str == "" || str == null)
+                        if (str == null)
                         {
                             dataCorrupt = true;
                             break;
@@ -74,11 +74,11 @@ namespace Website_GIP
 
                             if (data[6].Length >= 12)
                             {
-                                data[6] = data[6].Insert(2, "-");
-                                data[6] = data[6].Insert(5, "-");
-                                data[6] = data[6].Insert(11, ":");
-                                data[6] = data[6].Insert(14, ":");
-                                data[6] = data[6].Insert(17, ":");
+                                data[6] = data[6].Insert(1, "-");
+                                data[6] = data[6].Insert(4, "-");
+                                data[6] = data[6].Insert(10, ":");
+                                data[6] = data[6].Insert(13, ":");
+                                data[6] = data[6].Insert(16, ":");
                             }
                             string time = data[6];
                             string user = data[7];
@@ -131,8 +131,8 @@ namespace Website_GIP
 
         static void AddData(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string time, string user, string gemeente)
         {
-             string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
-             //string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+             //string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+             string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
              //string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\leerling\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
              OleDbConnection connection = new OleDbConnection();
 
