@@ -44,7 +44,7 @@ namespace Website_GIP
 
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
-            string[] loginMessage = { "Verkeerde wachtwoord of gebruikersnaam!", "U bent al ingelogd!" };
+            string[] loginMessage = { "Verkeerd wachtwoord of gebruikersnaam!", "U bent al ingelogd!" };
             // met de userId kan de gebruiker zich authenticeren;
 
             userHash = ComputeHash(TbUser.Text + TbPassword.Text);
@@ -89,6 +89,7 @@ namespace Website_GIP
         {
 
         }
+
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             string strFileName;

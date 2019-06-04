@@ -11,31 +11,32 @@ Kalmthout
 
 var data;
 let min = 0;
-let max = 100;
+let max = 10;
+
+var sliderFrom = document.getElementById("From");
+var sliderUntil = document.getElementById("Until");
+var spanVan = document.getElementById("van");
+var spanTot = document.getElementById("tot");
 
 $(document).ready(function () {
 
     PageMethods.GetData(drawElements);
 
-    var sliderFrom = document.getElementById("From");
-    var sliderUntil = document.getElementById("Until");
-    var spanVan = document.getElementById("van");
-    var spanTot = document.getElementById("tot");
-
-    sliderUntil.oninput = function () {
-
-        max = this.value;
-        drawCharts(min, max);
-        spanTot.innerHTML = data.chart.Tijd[max];
-    }
-
-    sliderFrom.oninput = function () {
-
-        min = this.value;
-        drawCharts(min, max);
-        spanVan.innerHTML = data.chart.Tijd[min];
-    }
 });
+
+sliderUntil.oninput = function () {
+
+    max = this.value;
+    drawCharts(min, max);
+    spanTot.innerHTML = data.chart.Tijd[max];
+}
+
+sliderFrom.oninput = function () {
+
+    min = this.value;
+    drawCharts(min, max);
+    spanVan.innerHTML = data.chart.Tijd[min];
+}
 
 function drawElements(response) {
 
@@ -63,10 +64,8 @@ function drawMap(features) {
         el.className = 'marker';
 
         // make a marker for each feature and add to the map
-        new mapboxgl.Marker(el)
-            .setLngLat(marker.geometry.coordinates)
-            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-                .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        new mapboxgl.Marker(el).setLngLat(marker.geometry.coordinates).setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
             .addTo(map);
     });
     map.addControl(new mapboxgl.NavigationControl());

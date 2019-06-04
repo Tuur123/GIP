@@ -87,7 +87,7 @@ namespace Website_GIP
                             string query = string.Format("json?key=2dacfb3978c248c497fffefc37f76ca4&q={0}%2C+{1}&pretty=1&no_annotations=1", breedtegraad, lengtegraad);
                             string result;
 
-                            Console.WriteLine("Making API Call...");
+                            Console.WriteLine(" >> Making API Call...");
                             Gemeente.GemeenteData gm = new Gemeente.GemeenteData();
 
                             using (var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }))
@@ -105,9 +105,9 @@ namespace Website_GIP
 
                             AddData(vochtigheid, temperatuur, lichtsterkte, CO2, breedtegraad, lengtegraad, time, user, gemeente);
                         }
-                        catch (Exception error)
+                        catch (Exception)
                         {
-                            Console.WriteLine(error);
+                            //.WriteLine(error);
                         }
                     }
                     else
@@ -131,8 +131,8 @@ namespace Website_GIP
 
         static void AddData(string vochtigheid, string temperatuur, string lichtsterkte, string CO2, string breedtegraad, string lengtegraad, string time, string user, string gemeente)
         {
-             //string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
-             string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+             string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\Arthur\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
+             //string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\5TICT socquet\Documents\GIP\GIP-hub\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
              //string connString = @"Provider = Microsoft.ACE.OLEDB.12.0; Data Source = C:\Users\leerling\Documents\GitHub\GIP\Website\Website_GIP\Website_GIP\Database.mdb;Persist Security Info = False;";
              OleDbConnection connection = new OleDbConnection();
 
